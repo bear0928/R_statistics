@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Chapter 2
 
-下載[Chapter 2 R markdown 檔案](https://drive.google.com/file/d/1M_kXqb9Cb6ClxtXUG6D9vuXCRdsYVXl0/view?usp=sharing)
+下載[Chapter 2 R markdown 檔案](https://drive.google.com/file/d/1JJa5F2DwkJ8Szw5mhVzfSns4wEOGj2JE/view?usp=sharing)
 
 ## 1. 安裝套件&載入資料
 
