@@ -11,17 +11,44 @@ output:
     highlight: tango
 ---
 
-
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Getting Started with R
+
+R 是一款專為統計分析和數據視覺化設計的強大且免費的軟件環境。<br>
+它融合了統計包的便利性和編程的靈活性，廣泛應用於數據分析、機器學習和科學研究。<br>
+R 提供了豐富的統計和圖形功能，使得用戶能夠進行複雜的數據操作和高質量的圖形輸出。<br>
+
+
+## 1. 安裝與R語言入門
+
+下載[教學檔案](https://drive.google.com/file/d/19KnlivREtSyZJWFhNvTUQkHfPrDvVnBn/view?usp=sharing)
+
+## 2. 設定工作目錄 (working directory)
+
+```{r, wd}
+# 獲取當前工作目錄，使用函數 getwd()
+getwd()
+
+# 設置工作目錄，使用函數 setwd()
+setwd("/Users/bear/dev/Python")
+getwd()
+
+```
+
+
+
+
+
 # Chapter 2
 
-下載[Chapter 2 R markdown 檔案](https://drive.google.com/file/d/1JJa5F2DwkJ8Szw5mhVzfSns4wEOGj2JE/view?usp=sharing)
+Chapter 2 - R markdown檔案 [下載點](https://drive.google.com/file/d/1JJa5F2DwkJ8Szw5mhVzfSns4wEOGj2JE/view?usp=sharing)
 
-## 1. 安裝套件&載入資料
+
+
+## 1. 安裝並載入套件&讀檔
 
 ```{r CRAN, include=FALSE}
 options(repos = c(CRAN = "https://cran.r-project.org"))
@@ -30,7 +57,7 @@ options(repos = c(CRAN = "https://cran.r-project.org"))
 
 ```{r install_packages, message=FALSE, warning=FALSE, results='hide'}
 # 安裝openxlsx套件--套件只要安裝過一次即可
-install.packages("openxlsx")
+# install.packages("openxlsx")
 
 # 載入套件
 library(openxlsx)
@@ -38,6 +65,8 @@ library(openxlsx)
 
 
 ### 將xlsx檔案讀入為dataframe
+
+Chapter2.xlsx [下載點](https://docs.google.com/spreadsheets/d/16s-_ftmfIGnKEoCx1QC34F1N7DUQSILk/edit?usp=sharing&ouid=110553448349846752071&rtpof=true&sd=true)
 
 ```{r read_file}
 # 讀取檔案
@@ -145,8 +174,8 @@ barplot(marital.status.matrix.t, # 傳入的數據
         beside = TRUE, # 指定條形圖是並列顯示，而不是堆疊顯示
         ylab = 'Proportions', # 設定y軸標籤
         col = c('slateblue4', 'red3')) # 設定不同類別的顏色，此處共設定兩種顏色
-        abline(h=0) # 在當前的圖形中添加一條水平於 y=0 的直線（也就是x軸）。
-        legend("topright", c("1960","2010"), pch=15, col=c("slateblue4","red3")) # 設置圖例位置、標籤、字體大小與顏色
+abline(h=0) # 在當前的圖形中添加一條水平於 y=0 的直線（也就是x軸）
+legend("topright", c("1960","2010"), pch=15, col=c("slateblue4","red3")) # 設置圖例位置、標籤、字體大小與顏色
 ```
 
 ## 4. 繪製直方圖(Histogram)
@@ -203,3 +232,77 @@ plot(edinc.matrix, ylab = "Income", xlab = "Education")
 
 
 # Chapter 3
+
+在這個章節，我們使用的資料集是「Fund_Returns」
+
+Fund_Returns.xlsx [下載點](https://docs.google.com/spreadsheets/d/1rKbstviJN1Rppem3h56P1kraNQOcpxC-/edit?usp=sharing&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1. 載入套件&讀檔
+```{r, read_file2}
+# 載入套件
+library(openxlsx)
+
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Fund_Returns.xlsx" # 更改成您要讀取之xlsx的路徑
+
+# 使用read.xlsx函數讀取
+fund.returns.df <- read.xlsx(file_path)
+
+# 印出資料集
+print(fund.returns.df)
+```
+
+## 2. 獲取基本數據摘要
+
+```{r summary}
+# 使用 fund.returns.df 展示如何獲取一個dataframe的數據統計摘要
+(summary(fund.returns.df))
+```
+
+```{r mean}
+# 此外，R 具有許多可以獨立生成這些測量值的函數。
+# 例如，函數 mean()、median()、min()、max()、sd() 和 var() 分別提供均值、中位數、最小值、最大值、標準差和方差。
+# 假設想找到 Fund_Return 數據中 Metals 基金的均值，可以輸入以下命令：
+mean(fund.returns.df[, 'Metals'])
+```
+
+## 3. 建立箱型圖(Box Plot)
+
+
+```{r box plot fund.returns1}
+# 使用 boxplot() 函數與fund.returns.df數據框來創建 Metals 的水平箱型圖
+# 方法一
+boxplot(fund.returns.df[, 'Metals'], horizontal = TRUE)
+```
+
+```{r box plot fund.returns2}
+# 方法二
+boxplot(fund.returns.df$Metals, # 選擇數據
+        horizontal = TRUE, # 生成水平箱型圖
+        main = NULL, # 設置圖表的標題
+        xlab = NULL) # 設置 X 軸的標籤
+```
+
+## 4. 計算協方差和相關係數
+
+### 計算協方差(Covariance)
+```{r Covariance}
+# 計算協方差矩陣
+cov_matrix <- cov(fund.returns.df)
+print(cov_matrix)
+```
+
+### 計算相關係數(Correlation Coefficients)
+
+```{r Correlation Coefficients}
+# 計算相關矩陣
+cor_matrix <- cor(fund.returns.df)
+print(cor_matrix)
+```
+
+
+
+# 參考資料
+
+**Textbook**<br>
+*Jaggia, S., & Kelly, A. (2019). Business statistics: Communicating with numbers (3th ed.). McGraw-Hill Education. *
