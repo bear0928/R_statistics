@@ -1,6 +1,6 @@
 ---
 title: "R Guideline"
-author: "TA Hsiung, Hsin Ting"
+author: "TA Hsiung"
 date: "2024-07-10"
 output:
   rmdformats::readthedown:
@@ -24,7 +24,7 @@ R 提供了豐富的統計和圖形功能，使得用戶能夠進行複雜的數
 
 ## 1. 安裝與R語言入門
 
-下載[教學檔案](https://drive.google.com/file/d/19KnlivREtSyZJWFhNvTUQkHfPrDvVnBn/view?usp=sharing)
+教學檔案.pdf [下載點](https://drive.google.com/file/d/19KnlivREtSyZJWFhNvTUQkHfPrDvVnBn/view?usp=sharing)
 
 ## 2. 設定工作目錄 (working directory)
 
@@ -45,8 +45,6 @@ getwd()
 # Chapter 2
 
 Chapter 2 - R markdown檔案 [下載點](https://drive.google.com/file/d/1JJa5F2DwkJ8Szw5mhVzfSns4wEOGj2JE/view?usp=sharing)
-
-
 
 ## 1. 安裝並載入套件&讀檔
 
@@ -166,7 +164,7 @@ print(marital.status.matrix.t)
 # 使用colnames()函數為轉置後的矩陣中的每一列命名列名
 colnames(marital.status.matrix.t) <- marital.status.df[, 'Marital.Status']
 
-# 這樣轉至後的矩陣就有列名了
+# 這樣轉置後的矩陣就有列名了
 print(marital.status.matrix.t)
 
 # 使用 barplot() 函數創建一個長條圖
@@ -233,8 +231,9 @@ plot(edinc.matrix, ylab = "Income", xlab = "Education")
 
 # Chapter 3
 
-在這個章節，我們使用的資料集是「Fund_Returns」
+Chapter 3 - R markdown檔案 [下載點](https://drive.google.com/file/d/1JlP8sGDQN3GHUixnh8TqjGmZJ-r2wrhZ/view?usp=share_link)
 
+**在這個章節，我們使用的資料集是「Fund_Returns」:**
 Fund_Returns.xlsx [下載點](https://docs.google.com/spreadsheets/d/1rKbstviJN1Rppem3h56P1kraNQOcpxC-/edit?usp=sharing&ouid=110553448349846752071&rtpof=true&sd=true)
 
 ## 1. 載入套件&讀檔
@@ -283,11 +282,11 @@ boxplot(fund.returns.df$Metals, # 選擇數據
         xlab = NULL) # 設置 X 軸的標籤
 ```
 
-## 4. 計算協方差和相關係數
+## 4. 計算共變異數和相關係數
 
-### 計算協方差(Covariance)
+### 計算共變異數(Covariance)
 ```{r Covariance}
-# 計算協方差矩陣
+# 計算共變異數矩陣
 cov_matrix <- cov(fund.returns.df)
 print(cov_matrix)
 ```
