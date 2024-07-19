@@ -96,7 +96,7 @@ pie(marital.status.df[, "1960"], # 選擇使用marital.status.df中1960年的資
 
 ```{r, pie_chart_ggplot2}
 # ggplot2套件繪圖功能
-#載入ggplot2套件
+# 載入ggplot2套件
 library(ggplot2)
 
 # 設置圓餅圖的顏色
@@ -299,6 +299,36 @@ cor_matrix <- cor(fund.returns.df)
 print(cor_matrix)
 ```
 
+# Chapter 5
+
+Chapter 5 - R markdown檔案 [下載點](https://drive.google.com/file/d/1sEUBeMeWbyOTpv6esoBX8NVxV3d-2lCX/view?usp=share_link)
+
+## 1.二項分布
+**使用 dbinom(x, n, p) 函數來計算二項隨機變數 X 取特定值 x 的機率** <br>
+**其中 x 是成功次數，n 是試驗次數，p 是成功的機率**
+```{r dbinom(x, n, p)}
+# 課本範例5.9a
+# 因為 X 是一個二項隨機變數，且 n = 100，p = 0.047，我們可以通過輸入以下程式碼來找到 P(X = 5):
+dbinom(5, 100, 0.047)
+```
+
+## 2.卜瓦松分布
+**使用 dpois(x, μ) 函數來計算泊松隨機變數 X 取特定值 x 的機率**<br>
+**其中 x 是在某個區間內的成功次數，μ 是該區間內的平均值**
+```{r ppois(x, μ)}
+# 課本範例5.11a
+# 因為 X 是一個泊松隨機變數，且 μ = 114，我們可以通過輸入以下程式碼來找到 P(X ≤ 100):
+ppois(100, 114)
+```
+
+## 3.超幾何分布
+**使用 dhyper(x, S, N − S, n) 函數來計算超幾何隨機變數 X 取特定值 x 的機率**<br>
+**其中 x 是樣本中的成功次數，S 是總體中的成功次數，N 是總體大小（所以 N − S 是失敗次數），n 是樣本大小**
+```{r dhyper(x, S, N − S, n)}
+# 課本範例5.12a
+# 因為 X 是一個超幾何隨機變數，且 S = 2，N = 20（所以 20 − 2 = 18），以及 n = 5，我們可以通過輸入以下程式碼來找到 P(X = 1)：
+dhyper(1, 2, 18, 5)
+```
 
 
 # 參考資料
