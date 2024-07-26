@@ -331,6 +331,123 @@ dhyper(1, 2, 18, 5)
 ```
 
 
+# Chapter 6
+
+## 1.均勻分布
+**使用 punif(x, a, b, lower.tail = FALSE or TRUE) 函數來計算連續均勻隨機變數 X 在區間 [a, b] 內取某個範圍值的機率**<br>
+**其中 x 是我們希望評估機率的值，a 是連續均勻分布的下界，b 是上界**<br>
+**對於函數中的最後一個參數，如果我們輸入 lower.tail = FALSE，則 R 返回 P(X>x)；如果輸入 lower.tail = TRUE，則 R 返回 P(X≤x)**
+```{r punif(x, a, b)}
+# 課本範例6.1b
+# 因為 X 是一個連續均勻隨機變數，且 a = 2500 和 b = 5000，我們可以通過輸入以下程式碼來找到 P(X>4000)：
+punif(4000, 2500, 5000, lower.tail = FALSE)
+```
+
+## 2.常態分佈
+**使用 pnorm(x, μ, σ, lower.tail = FALSE or TRUE) 函數來計算常態隨機變數 X 小於或等於 x 或大於 x 的機率**<br>
+**其中 x 是我們希望評估機率的值，μ 是總體平均數，σ 是總體標準差**<br>
+**對於函數中的最後一個參數，如果輸入 lower.tail = FALSE，則 R 返回 P(X>x)；如果輸入 lower.tail = TRUE，則 R 返回 P(X≤x)**
+
+```{r pnorm}
+# 課本範例6.8a
+# 因為X 是一個正態隨機變數，且 μ = 12 和 σ = 3.2，我們可以通過輸入以下程式碼來找到 P(X>20)
+pnorm(20, 12, 3.2, lower.tail = FALSE)
+```
+
+### 逆轉換
+**使用 qnorm(probability, μ, σ) 函數來找到對應於給定累積正態機率的特定 x 值**<br>
+**其中 probability 是給定的累積機率，μ 是總體平均數，σ 是總體標準差**
+```{r inverse}
+# 課本範例6.8c
+# 希望找到 x 使得 P(X≤x)=0.90，且 μ = 12 和 σ = 3.2，我們可以通過輸入以下程式碼來找到該 x 值
+qnorm(0.90, 12, 3.2)
+```
+
+## 3.指數分佈
+**使用 pexp(x, λ, lower.tail = FALSE or TRUE) 函數來計算指數隨機變數 X 小於或等於 x 或大於 x 的機率**<br>
+**其中 x 是我們希望評估機率的值，λ 是速率參數**<br>
+**對於函數中的最後一個參數如果我們輸入 lower.tail = FALSE，則 R 返回 P(X>x)；如果輸入 lower.tail = TRUE，則 R 返回 P(X≤x)**
+```{r pexp}
+# 課本範例6.9b
+# 因為 X 是一個指數隨機變數，且 λ = 1/25，我們可以通過輸入以下程式碼來找到 P(X>60)
+pexp(60, rate = 1/25, lower.tail = FALSE)
+```
+
+## 4.對數常態分布
+**使用 plnorm(y, μ, σ) 函數來計算對數常態隨機變數 Y 小於或等於 y 的機率**<br>
+**其中 y 是我們希望評估機率的值，μ 是潛在正態分布的平均數，σ 是潛在正態分布的標準差**
+```{r plnorm}
+# 課本範例6.11a
+# 因為 Y 是一個對數正態隨機變數，且 μ = 5 和 σ = 1.2，我們可以通過輸入以下程式碼來找到 P(Y≤200)
+plnorm(200, 5, 1.2)
+```
+
+### 逆轉換
+**使用 qlnorm(probability, μ, σ) 函數來找到對應於給定累積對數正態機率的特定 y 值**<br>
+**其中 probability 是給定的累積機率，μ 是潛在正態分布的平均數，σ 是潛在正態分布的標準差**
+```{r qlnorm}
+# 課本範例6.11b
+# 因為我們希望找到 y 使得 P(Y≤y)=0.90，且 μ = 5 和 σ = 1.2，我們可以通過輸入以下程式碼來找到該 y 值
+qlnorm(0.90, 5, 1.2)
+```
+
+# Chapter 7
+
+## 1.安裝、載入套件&讀檔
+```{r load}
+## 安裝套件
+# install.packages(c("openxlsx", "qcc"))
+## 載入套件
+library(openxlsx)
+library(qcc)
+
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter7.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Lux_Hotel" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+lux.hotel.df <- read.xlsx(file_path, sheet = sheet_name_1)
+
+print(lux.hotel.df)
+```
+
+## 2.生成隨機樣本
+**（重現範例7.1）**
+
+### 使用抽樣
+#### A. 使用 sample() 函數
+```{r sample}
+# 從 20,000 名學生中隨機選擇 100 名學生
+sample(1:20000, 100, replace = FALSE)
+```
+#### B. 使用 sample.int() 函數
+```{r sample.int}
+# 使用 replace = FALSE 因為我們希望不放回抽樣
+sample.int(20000, 100, replace = FALSE)
+```
+
+### 從分布中生成樣本
+#### A. 使用 runif() 函數從均勻分布中生成樣本
+```{r runif()}
+values <- runif(100, 1, 20000)
+values
+```
+#### B. 將生成的值四捨五入到整數，獲得隨機整數樣本
+```{r random}
+round(values, 0)
+```
+
+## 3.構建 x̄ 圖
+### A. 從 lux.hotel.df 數據文件中提取等待時間的列
+```{r lux.hotel.df}
+wait.times <- lux.hotel.df[, 3:6]
+print(wait.times)
+```
+### B. 使用 qcc 函數創建 x̄ 圖
+```{r graph}
+# 創建 x̄ 圖
+qcc(wait.times, type = "xbar", center = 60, std.dev = 30, nsigmas = 3)
+```
 # 參考資料
 
 **Textbook**<br>
