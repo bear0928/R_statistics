@@ -392,6 +392,7 @@ qlnorm(0.90, 5, 1.2)
 ```
 
 # Chapter 7
+Chapter7.xlsx [下載點](https://docs.google.com/spreadsheets/d/1jitup-4jbbFoG0NeH8cqt6HqMdsfd0WC/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
 ## 1.安裝、載入套件&讀檔
 ```{r load}
