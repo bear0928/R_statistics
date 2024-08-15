@@ -395,7 +395,7 @@ qlnorm(0.90, 5, 1.2)
 Chapter7.xlsx [下載點](https://docs.google.com/spreadsheets/d/1jitup-4jbbFoG0NeH8cqt6HqMdsfd0WC/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
 ## 1.安裝、載入套件&讀檔
-```{r load}
+```{r load, message=FALSE, warning=FALSE}
 ## 安裝套件
 # install.packages(c("openxlsx", "qcc"))
 ## 載入套件
@@ -442,13 +442,344 @@ round(values, 0)
 ### A. 從 lux.hotel.df 數據文件中提取等待時間的列
 ```{r lux.hotel.df}
 wait.times <- lux.hotel.df[, 3:6]
-print(wait.times)
+head(wait.times)
 ```
 ### B. 使用 qcc 函數創建 x̄ 圖
-```{r graph}
+```{r graph, message=FALSE, warning=FALSE}
 # 創建 x̄ 圖
 qcc(wait.times, type = "xbar", center = 60, std.dev = 30, nsigmas = 3)
 ```
+
+# Chapter 8
+
+Chapter8.xlsx [下載點](https://docs.google.com/spreadsheets/d/1irH4-_QJqi5AL4mJRuc-se3b9fUuP9fa/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r ch8-1, message=FALSE, warning=FALSE}
+# 安裝套件
+# install.packages(c("openxlsx", "BSDA"))
+
+# 載入套件
+library(openxlsx)
+library(BSDA)
+
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter8.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Hockey_Pucks" #這裡輸入您要讀取的sheet的名稱
+sheet_name_2 <- "Lottery" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+hockey.pucks.df <- read.xlsx(file_path, sheet = sheet_name_1)
+lottery.df <- read.xlsx(file_path, sheet = sheet_name_2)
+
+```
+
+```{r ch8-2, message=FALSE, warning=FALSE}
+# 用head() 函數用於查看資料的前幾行，默認值為6 行
+head(hockey.pucks.df)
+```
+
+```{r ch8-3, message=FALSE, warning=FALSE}
+# 調整查看的行數為前7行
+head(lottery.df, 7)
+```
+
+### 對dataframe使用summary()函數
+
+```{r 8-4}
+summary(hockey.pucks.df)
+```
+
+```{r 8-5}
+summary(lottery.df)
+```
+
+## 2. σ 已知時， 估計 μ
+```{r 8-6, message=FALSE, warning=FALSE}
+# 使用 hockey.pucks.df 數據文件來說明如何在已知 σ 的情況下估計 μ 的方法
+# 使用 BSDA 包中的 z.test() 函數
+# 將總體標準差 sigma.x 設置為 7.5，將信賴區間 conf.level 設置為 0.92
+
+# 執行 z 檢驗
+z.test(hockey.pucks.df[, "Weight"], sigma.x = 7.5, conf.level = 0.92)
+```
+
+## 3. σ 未知時， 估計 μ
+```{r 8-7, message=FALSE, warning=FALSE}
+# 使用 lottery.df 數據文件來說明如何在未知 σ 的情況下估計 μ 的方法
+# 使用 BSDA 包中的 t.test() 函數
+# 信賴區間 conf.level 的默認值為 0.95，但為了讓程式碼更清楚，在這裡仍然明確寫入程式碼中
+
+# 執行 z 檢驗
+t.test(lottery.df[, "Expenditures"], conf.level = 0.95)
+```
+
+## 4.估計 p
+**使用範例8.7來說明如何估計 p**<br>
+
+### A. 計算樣本比例
+```{r 8-8A, message=FALSE, warning=FALSE}
+# 設定成功次數 successes 為 7，試驗次數 trials 為 25，然後通過將 successes 除以 trials 來獲得樣本比例
+successes <- 7
+trials <- 25
+pbar <- successes / trials
+```
+
+### B. 計算臨界值和誤差範圍
+```{r 8-8B, message=FALSE, warning=FALSE}
+# 使用 qnorm() 函數來找到臨界值 z
+# 由於我們希望信賴區間為 90%，因此 α = 1 − 0.90 =0.10，我們使用 α/2 = 0.05
+z <- -qnorm(0.05)
+# 計算誤差範圍
+margin.of.error <- z * sqrt(pbar * (1 - pbar) / trials)
+```
+
+### C. 計算信賴區間
+```{r 8-8C, message=FALSE, warning=FALSE}
+# 通過從樣本比例中加上和減去誤差範圍來找到信賴區間
+conf.interval <- c(pbar - margin.of.error, pbar + margin.of.error)
+conf.interval
+```
+
+# Chapter 9
+
+Chapter9.xlsx [下載點](https://docs.google.com/spreadsheets/d/1KyHUSv7p4YvgKpVaQGBZrQhVcQZd0Xyh/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r ch9-1, message=FALSE, warning=FALSE}
+# 安裝套件
+# install.packages(c("openxlsx", "BSDA"))
+
+# 載入套件
+library(openxlsx)
+library(BSDA)
+
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter9.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Debit_Spending" #這裡輸入您要讀取的sheet的名稱
+sheet_name_2 <- "MI_Life" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+debit.spending.df <- read.xlsx(file_path, sheet = sheet_name_1)
+mi.life.expectancy.df <- read.xlsx(file_path, sheet = sheet_name_2)
+```
+
+### 對dataframe使用summary()函數
+
+```{r 9-2}
+summary(debit.spending.df)
+```
+
+```{r 9-3}
+summary(mi.life.expectancy.df)
+```
+
+## 2. σ 已知時， 檢驗 μ
+```{r 9-4, message=FALSE, warning=FALSE}
+# 使用 debit.spending.df 數據文件來說明如何在已知 σ 的情況下檢驗 μ 的方法
+# 使用 BSDA 包中的 z.test() 函數
+# 因為對立假設是 H_A : μ < 8000，所以我們設置 μ = 8000 並將 alternative 選項設置為 "less"
+# 將標準差 sigma.x 設置為 500
+
+# 執行 z 檢驗
+z.test(debit.spending.df[, "Spending"], mu = 8000, sigma.x = 500, alternative = "less")
+```
+
+## 3. σ 未知時， 檢驗 μ
+```{r 9-5, message=FALSE, warning=FALSE}
+# 使用 mi.life.expectancy.df 數據文件來說明如何在未知 σ 的情況下估計 μ 的方法
+# 使用 BSDA 包中的 t.test() 函數
+# 因為對立假設是 H_A : μ < 81.48，所以我們設置 μ = 81.48 並將 alternative 選項設置為 "less"
+
+# 執行 t 檢驗
+t.test(mi.life.expectancy.df[, "Age"], mu = 81.48, alternative = "less")
+```
+
+## 4.檢驗 p
+**使用範例9.14來說明如何檢驗 p**<br>
+
+### A. 計算樣本比例
+```{r 9-6A, message=FALSE, warning=FALSE}
+# 設定成功次數 successes 為 67，試驗次數 trials 為 180，然後通過將 successes 除以 trials 來獲得樣本比例
+successes <- 67
+trials <- 180
+pbar <- successes / trials
+```
+
+### B. 計算樣本 z 統計量
+
+使用公式計算 z 統計量：
+![公式1](/Users/bear/dev/R/Statistics/zfor.png "統計量")
+```{r 9-6B, message=FALSE, warning=FALSE}
+# p=0.40 是在對立假設中的比例
+z.statistic <- (pbar - 0.40) / sqrt(0.40 * (1 - 0.40) / trials)
+```
+
+### C. 計算 p 值
+```{r 9-6C, message=FALSE, warning=FALSE}
+# 使用 pnorm() 函數來計算與樣本 z 統計量相關的 p 值
+# 由於對立假設是 HA : p<0.40，因此需要計算左尾 p 值
+p.value <- pnorm(z.statistic)
+p.value
+```
+
+# Chapter 10
+
+Chapter10.xlsx [下載點](https://docs.google.com/spreadsheets/d/1McirZ6yGPMRtXTL0bSDElsu5fHRfaMau/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r 10-1}
+library(openxlsx)
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter10.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Gold_Oil" #這裡輸入您要讀取的sheet的名稱
+sheet_name_2 <- "Food_Calories" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+gold.oil.df <- read.xlsx(file_path, sheet = sheet_name_1)
+food.calories.df <- read.xlsx(file_path, sheet = sheet_name_2)
+```
+
+```{r 10-2}
+summary(gold.oil.df)
+```
+
+```{r 10-3}
+summary(food.calories.df)
+```
+
+## 2.測試 μ1 - μ2 的方法
+
+
+#### 1.簡介
+我們的目標是檢驗兩個獨立樣本的均值差異是否為零。具體來說，我們的零假設 (H0) 是 μ1 - μ2 = 0，而對立假設 (HA) 是 μ1 - μ2 ≠ 0。這表示我們希望檢查 Gold 和 Oil 兩個變數的均值是否存在顯著差異。
+
+#### 2.使用 t.test() 函數
+在 R 語言中，我們可以使用 t.test() 函數來進行這個檢驗。此函數會進行雙尾 t 檢驗，假設樣本獨立且方差不相等（這是 t.test() 函數的預設設置）。<br>
+
+#### 3.程式碼與程式碼解釋
+gold.oil.df[, "Gold"]：選取 gold.oil.df 數據框中的 Gold 列。<br>
+gold.oil.df[, "Oil"]：選取 gold.oil.df 數據框中的 Oil 列。<br>
+這段代碼會比較 Gold 和 Oil 兩組數據的均值，進行雙尾 t 檢驗。<br>
+
+```{r 10-4}
+# 範例 10.4
+t.test(gold.oil.df[, "Gold"], gold.oil.df[, "Oil"])
+```
+
+#### 4.結果解讀
+運行這段程式碼後，R 會輸出 t 檢驗的結果，包括 t 值、p 值以及均值的信賴區間等。根據 p 值，我們可以判斷是否拒絕零假設。若 p 值小於顯著性水平（例如 0.05），則我們可以拒絕零假設，認為兩組數據的均值存在顯著差異。<br>
+
+## 2.測試 μ_0 的方法
+
+
+#### 1.簡介
+我們使用範例 10.8 和 food.calories.df 數據文件來演示如何測試 μ_0。以下是步驟和 R 語言程式碼：<br>
+我們的目標是檢驗兩組相關樣本（Before 和 After）之間的均值差異是否大於零。具體來說，我們的零假設 (H0) 是 μ_0 ≤ 0，而對立假設 (HA) 是 μ_0 > 0。這表示我們希望檢查 After 階段的均值是否顯著高於 Before 階段的均值。<br>
+
+#### 2.使用 t.test() 函數
+
+在 R 語言中，我們可以使用 t.test() 函數來進行配對樣本 t 檢驗。由於我們要進行單尾檢驗（右尾檢驗），並且樣本是配對的，我們需要設置以下參數：<br>
+
+paired = TRUE：表示進行配對樣本檢驗。<br>
+alternative = "greater"：表示進行右尾檢驗，即檢驗均值差是否大於零。<br>
+
+#### 3.程式碼與程式碼解釋
+food.calories.df[, "Before"]：選取 food.calories.df 數據框中的 Before 列。<br>
+food.calories.df[, "After"]：選取 food.calories.df 數據框中的 After 列。<br>
+paired = TRUE：指定這是一個配對樣本檢驗。<br>
+alternative = "greater"：指定進行右尾檢驗，即檢驗均值差是否大於零。<br>
+
+```{r 10-5}
+# 範例 10.8
+t.test(food.calories.df[, "Before"], food.calories.df[, "After"], paired = TRUE, alternative = "greater")
+```
+
+#### 4.結果解讀
+根據 p 值（遠小於顯著性水平 0.05），我們可以拒絕零假設，認為 After 階段的均值顯著高於 Before 階段的均值。<br>
+
+# Chapter 11
+
+Chapter11.xlsx [下載點](https://docs.google.com/spreadsheets/d/1BK8N8Ghh0gokco88COP-PzTWVTNFWP1-/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r 11-1}
+library(openxlsx)
+library(EnvStats)
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter11.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Fund_Returns" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+fund.returns.df <- read.xlsx(file_path, sheet = sheet_name_1)
+summary(fund.returns.df)
+```
+
+## 2.信賴區間計算 σ²
+
+使用 varTest() 函數來計算方差的置信區間：
+```{r 11-2}
+result <- varTest(fund.returns.df[, "Metals"])
+print(result)
+```
+
+## 3.檢驗 σ²
+
+使用範例 11.4 和 fund.returns.df 數據文件中的 "Income" 變量來進行方差檢驗。我們的假設檢驗形式如下：<br/>
+
+零假設 (H0): σ² = 72.25<br/>
+對立假設 (HA): σ² ≠ 72.25<br/>
+
+```{r 11-3}
+result <- varTest(fund.returns.df[, "Income"], sigma.squared = 72.25)
+print(result)
+```
+
+## 4.方差比值的信賴區間計算
+我們使用範例 11.6 和 fund.returns.df 數據文件來構造兩個人口方差比值的置信區間。以下步驟詳細介紹了如何使用 R 來完成這個計算。<br>
+```{r 11-4}
+# 計算樣本方差比值
+prop.var <- 182.25 / 457.96
+
+# 計算自由度
+df1 <- 11 - 1
+df2 <- 16 - 1
+
+# 計算信賴區間的下限
+lower.bound <- prop.var / qf(0.975, df1, df2)
+
+# 計算信賴區間的上限
+upper.bound <- prop.var * qf(0.975, df2, df1)
+
+# 顯示結果
+print(lower.bound)
+print(upper.bound)
+
+```
+
+## 5.方差比值檢驗
+我們使用範例 11.8 和 fund.returns.df 數據文件來進行方差比值的假設檢驗。具體來說，我們將檢驗以下假設：
+![假設](/Users/bear/dev/R/Statistics/截圖 2024-08-15 晚上11.34.07.png "假設")
+
+#### A. 計算檢驗統計量
+```{r 11-5}
+# 計算樣本 F 統計量
+sample.F <- var(fund.returns.df[,"Metals"]) / var(fund.returns.df[,"Income"])
+
+# 顯示樣本 F 統計量
+print(sample.F)
+```
+
+#### B.計算 p 值
+```{r 11-6}
+# 計算 p 值
+pvalue <- 2 * pf(sample.F, 9, 9, lower.tail = FALSE)
+
+# 顯示 p 值
+print(pvalue)
+
+```
+
 # 參考資料
 
 **Textbook**<br>
