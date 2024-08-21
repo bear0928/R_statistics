@@ -1672,6 +1672,17 @@ margin-left: 0 !important;
       <li><a href="#方差比值的信賴區間計算" id="toc-方差比值的信賴區間計算">4.方差比值的信賴區間計算</a></li>
       <li><a href="#方差比值檢驗" id="toc-方差比值檢驗">5.方差比值檢驗</a></li>
       </ul></li>
+      <li><a href="#chapter-12" id="toc-chapter-12">Chapter 12</a>
+      <ul>
+      <li><a href="#安裝載入套件讀檔-5" id="toc-安裝載入套件讀檔-5">1.安裝、載入套件&amp;讀檔</a></li>
+      <li><a href="#適配度檢驗" id="toc-適配度檢驗">2.適配度檢驗</a></li>
+      <li><a href="#獨立性檢驗" id="toc-獨立性檢驗">3.獨立性檢驗</a></li>
+      </ul></li>
+      <li><a href="#chapter-14" id="toc-chapter-14">Chapter 14</a>
+      <ul>
+      <li><a href="#安裝載入套件讀檔-6" id="toc-安裝載入套件讀檔-6">1.安裝、載入套件&amp;讀檔</a></li>
+      <li><a href="#簡單線性迴歸分析" id="toc-簡單線性迴歸分析">2.簡單線性迴歸分析</a></li>
+      </ul></li>
       <li><a href="#參考資料" id="toc-參考資料">參考資料</a></li>
       </ul>
     </div>
@@ -2172,29 +2183,29 @@ y 的機率</strong><br> <strong>其中 y 是我們希望評估機率的值，μ
 <h4>A. 使用 sample() 函數</h4>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="co"># 從 20,000 名學生中隨機選擇 100 名學生</span></span>
 <span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20000</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>##   [1]  5814 14290  4060 13087   337  7801 18805  4158 16662 19903 14131 13573
-##  [13] 16301 17402  3911  4418 18010  3454  9465  4520 19933 13103  3600  1898
-##  [25] 18664 13455  6561  3335  2797 15824  5957  6261   884  8842  7345  2151
-##  [37]  5744 13767 18977  3493  6266 17187  2435 17165 16400 10183 13058  5267
-##  [49] 11761  5043  3435 17037  9870 14676 19296  2783 10294  2319 11384  4439
-##  [61] 19099 11979 12021 16653 16045  7591 13350 15030  1983 17204 10529  2511
-##  [73] 11308 13259  5668 11991  1325  4041   553 13879 12040  3157 12771  9940
-##  [85]  7175 16193  3336 19037 11466 17292  8161  8367  7771 17932   922 15610
-##  [97] 13469 15257  2136  1276</code></pre>
+<pre><code>##   [1]  4011 19326  9122  2679 17839  8491 16266 17111 11973 13443 19284  6346
+##  [13]  2082  1577  4557 13045  5027 11598 17454 18294  5196 14140 12890 19001
+##  [25]  6853 14362  1599 10661  2083 13801   363 16634 15500  8922 11342  4679
+##  [37] 14664 16890 19595 15377 15368 15899 14414  7661 15146  7020  2296  6448
+##  [49] 18895  6058  9722 11807 17904 13174  4461   602  1369  3116  1851  3947
+##  [61]  7634  1260 12181  6978 13638   862 17727  4430 15533   247 13656 18122
+##  [73]  9979  5481  4548   176  9221  4788  5391 12577 11181   900 16297  5918
+##  [85] 14395 17298  9192 15014 15623 11853  7611 16041 17846  4570  3175 14240
+##  [97] 10477  3202  8998 11744</code></pre>
 </div>
 <div id="b.-使用-sample.int-函數" class="section level4">
 <h4>B. 使用 sample.int() 函數</h4>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="co"># 使用 replace = FALSE 因為我們希望不放回抽樣</span></span>
 <span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="dv">20000</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>##   [1]  2701 14325  4909 16980 11046  1152 11485 12469  2403  8069  2592  2796
-##  [13]  8400 18999 11708   717  7478  2421  7800  6556 11048  2773 13519  6692
-##  [25] 14498 12497  5883 15410 16654 17897 19519  1308 14374 12503   663  1237
-##  [37] 15733 15348 13480 12662 11183  4820 13200 12611  3519 12644  6773 12462
-##  [49] 16135 12189 14491 17580 17063 11455 18442 13954  2062  6723  2940  6615
-##  [61] 12259  1728 18950 15599 14202 13481  1103 10551   511 18059 14704 19115
-##  [73] 16376 10400 12270  3579  1648  5687  7780  5340 14393 18339  3979   606
-##  [85]  5562 14506   897  9977 15588 11941  8972    54 11133  6752 17985  1026
-##  [97]  3680 18671 17157  4289</code></pre>
+<pre><code>##   [1] 16490  7397 19799  2858 14206  9541 13777  7159 16269   777 11561  8658
+##  [13]  8323  6503   876 15887 12822  2917 10701  9343  5680 15301 14479 14354
+##  [25] 10313  4614  2365 13236   540 12042  6090   342 16290 18602  8938 19464
+##  [37]  9114 11724 10153   539 12470 15852 13966 18070 19526   424 17405  5090
+##  [49] 10136  2643  3859  4781 13015 18886 17955   797 17333 19878 18980  7856
+##  [61] 10106  5368 19829  9458 13230  5804  8393 15939  5292 19416 18618 14551
+##  [73] 12273  8220 10060 13119  3168  3159  1670 18434 13402 16965  3508 13990
+##  [85]  2355 16885  8590  9836  3275 11933 13130 15006   281 11188 12253 16495
+##  [97] 12494  4710 10472  7800</code></pre>
 </div>
 </div>
 <div id="從分布中生成樣本" class="section level3">
@@ -2203,36 +2214,36 @@ y 的機率</strong><br> <strong>其中 y 是我們希望評估機率的值，μ
 <h4>A. 使用 runif() 函數從均勻分布中生成樣本</h4>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="dv">20000</span>)</span>
 <span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a>values</span></code></pre></div>
-<pre><code>##   [1] 13326.45925 19743.32320  1207.87180  7205.65446 15952.13359  1749.82852
-##   [7]    65.99358 11321.04054  1976.63417 14014.30575 12746.71909 14532.14673
-##  [13]   988.36454 19588.32880 10147.72662  4502.52710  2432.62172 17677.40990
-##  [19]   792.40565  2103.34054  7197.74030  2732.90626  3779.34603 19568.24377
-##  [25]  6741.76398  6673.77331 19968.84094  7777.42075  8340.84192  9965.45529
-##  [31] 18572.56602  9178.90095 18239.18809  4586.29195 17633.46033 11125.83726
-##  [37]  7313.90699 19488.46247  3245.14914  5691.38324 11880.47434  4520.01067
-##  [43] 18050.79827 16249.69425  7867.74468 15001.64921 18971.72643  5610.87212
-##  [49]  6438.41843  9502.35679 19161.90079 11968.29120  1230.27172  9099.36200
-##  [55]  1409.53089 14944.04434  9839.86127 19813.26557 10304.12574 13359.46973
-##  [61]  6074.46830 13027.04126  7846.95919 13043.07222  4431.74012  6930.04964
-##  [67] 15748.55764 15150.24982 18233.15889  2929.88392  6489.51130  7466.90354
-##  [73]  8402.45090 11667.21161  3373.73544 18891.64787  1179.68807   272.54664
-##  [79]  3359.88219  9377.35908  5524.20146  7271.78204  4465.70419   730.10396
-##  [85] 18475.43644  6597.96138 16851.34707 12583.02870 17255.87837 13040.65184
-##  [91]  8269.70498  6767.95308  3295.43928  6681.24571  5093.71938 17673.39951
-##  [97] 14779.15692 12530.59096 18171.99287  7503.48937</code></pre>
+<pre><code>##   [1] 11416.2649 19129.1475 19859.5823 13684.6189 16450.0799 18157.5112
+##   [7]  4079.6576 19846.4256  6172.7870  3908.3099 11080.3218 14933.0132
+##  [13] 16569.0326 16767.0338 10555.8882 12134.2150  9666.5105 15481.7894
+##  [19]  3971.0820  1973.4529 16370.8488 17244.0994 12441.2695  7478.5810
+##  [25]  7445.3765  1148.5782  8024.2906  8959.2846  5153.1105 11319.8787
+##  [31]  3910.1792  9018.1656   564.8645  3801.9718 10858.8403 16540.9751
+##  [37] 14371.7677  6013.6181 11520.2603  3796.2169  1565.3641 13750.3918
+##  [43] 19199.8720  9350.1295 17042.2880 14803.2063  8412.8201  4171.5470
+##  [49] 11696.4566  3032.4927 19202.8538 19828.4609  3809.1133  6703.0194
+##  [55]  6097.5783  9858.0749 16885.4783  1272.7254  4298.3896  7115.6263
+##  [61] 18843.7159   650.3140  9267.0519 19286.1007 18274.4274 12137.9067
+##  [67]  6969.3184 11160.8766 19914.9951   743.0540  7700.4827  4071.3566
+##  [73] 10275.8865  8188.7771 11929.7561  5449.1602 13273.3526 18676.3743
+##  [79] 12524.9236  2758.8912 13976.6859 19740.6937  1113.6215  5582.2866
+##  [85]  4668.2759 17386.4680  5560.8475 10212.3522 10561.7871 11966.0883
+##  [91] 13895.4250  3536.7593 14484.4778  8053.0102  5764.8775  1067.5985
+##  [97]  3461.0221  7376.7452 14321.0783  1247.7948</code></pre>
 </div>
 <div id="b.-將生成的值四捨五入到整數獲得隨機整數樣本" class="section level4">
 <h4>B. 將生成的值四捨五入到整數，獲得隨機整數樣本</h4>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="fu">round</span>(values, <span class="dv">0</span>)</span></code></pre></div>
-<pre><code>##   [1] 13326 19743  1208  7206 15952  1750    66 11321  1977 14014 12747 14532
-##  [13]   988 19588 10148  4503  2433 17677   792  2103  7198  2733  3779 19568
-##  [25]  6742  6674 19969  7777  8341  9965 18573  9179 18239  4586 17633 11126
-##  [37]  7314 19488  3245  5691 11880  4520 18051 16250  7868 15002 18972  5611
-##  [49]  6438  9502 19162 11968  1230  9099  1410 14944  9840 19813 10304 13359
-##  [61]  6074 13027  7847 13043  4432  6930 15749 15150 18233  2930  6490  7467
-##  [73]  8402 11667  3374 18892  1180   273  3360  9377  5524  7272  4466   730
-##  [85] 18475  6598 16851 12583 17256 13041  8270  6768  3295  6681  5094 17673
-##  [97] 14779 12531 18172  7503</code></pre>
+<pre><code>##   [1] 11416 19129 19860 13685 16450 18158  4080 19846  6173  3908 11080 14933
+##  [13] 16569 16767 10556 12134  9667 15482  3971  1973 16371 17244 12441  7479
+##  [25]  7445  1149  8024  8959  5153 11320  3910  9018   565  3802 10859 16541
+##  [37] 14372  6014 11520  3796  1565 13750 19200  9350 17042 14803  8413  4172
+##  [49] 11696  3032 19203 19828  3809  6703  6098  9858 16885  1273  4298  7116
+##  [61] 18844   650  9267 19286 18274 12138  6969 11161 19915   743  7700  4071
+##  [73] 10276  8189 11930  5449 13273 18676 12525  2759 13977 19741  1114  5582
+##  [85]  4668 17386  5561 10212 10562 11966 13895  3537 14484  8053  5765  1068
+##  [97]  3461  7377 14321  1248</code></pre>
 </div>
 </div>
 </div>
@@ -2679,14 +2690,29 @@ After 列。<br> paired = TRUE：指定這是一個配對樣本檢驗。<br> alt
 ## 
 ## 95% Confidence Interval:         LCL =  652.2418
 ##                                  UCL = 4594.6866</code></pre>
+<pre><code>varTest() 函數的主要輸入值：
+1. x:
+  數據向量，表示需要進行方差檢定的樣本。
+  如果是雙樣本檢定，這裡可以是第一個樣本數據的向量。
+2. y (可選):
+  另一個數據向量，用於雙樣本檢定。如果提供了這個向量，則檢驗兩個樣本的方差是否相等。
+  sigma.squared (可選):
+  方差的理論值，用於單樣本檢定。默認值為 1。
+3. alternative (可選):
+  定義備擇假設的類型。選項有：
+  &quot;two.sided&quot;（雙側檢定，默認）
+  &quot;less&quot;（左側檢定）
+  &quot;greater&quot;（右側檢定）
+4. conf.level (可選):
+  信賴區間的置信水平，默認為 0.95（即 95% 信賴區間）。</code></pre>
 </div>
 <div id="檢驗-σ²" class="section level2">
 <h2>3.檢驗 σ²</h2>
 <p>使用範例 11.4 和 fund.returns.df 數據文件中的 “Income”
 變量來進行方差檢驗。我們的假設檢驗形式如下：<br /></p>
 <p>零假設 (H0): σ² = 72.25<br /> 對立假設 (HA): σ² ≠ 72.25<br /></p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">varTest</span>(fund.returns.df[, <span class="st">&quot;Income&quot;</span>], <span class="at">sigma.squared =</span> <span class="fl">72.25</span>)</span>
-<span id="cb115-2"><a href="#cb115-2" tabindex="-1"></a><span class="fu">print</span>(result)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">varTest</span>(fund.returns.df[, <span class="st">&quot;Income&quot;</span>], <span class="at">sigma.squared =</span> <span class="fl">72.25</span>)</span>
+<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a><span class="fu">print</span>(result)</span></code></pre></div>
 <pre><code>## 
 ## Results of Hypothesis Test
 ## --------------------------
@@ -2715,23 +2741,23 @@ After 列。<br> paired = TRUE：指定這是一個配對樣本檢驗。<br> alt
 <p>我們使用範例 11.6 和 fund.returns.df
 數據文件來構造兩個人口方差比值的置信區間。以下步驟詳細介紹了如何使用 R
 來完成這個計算。<br></p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a><span class="co"># 計算樣本方差比值</span></span>
-<span id="cb117-2"><a href="#cb117-2" tabindex="-1"></a>prop.var <span class="ot">&lt;-</span> <span class="fl">182.25</span> <span class="sc">/</span> <span class="fl">457.96</span></span>
-<span id="cb117-3"><a href="#cb117-3" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="#cb117-4" tabindex="-1"></a><span class="co"># 計算自由度</span></span>
-<span id="cb117-5"><a href="#cb117-5" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="dv">11</span> <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb117-6"><a href="#cb117-6" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="dv">16</span> <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb117-7"><a href="#cb117-7" tabindex="-1"></a></span>
-<span id="cb117-8"><a href="#cb117-8" tabindex="-1"></a><span class="co"># 計算信賴區間的下限</span></span>
-<span id="cb117-9"><a href="#cb117-9" tabindex="-1"></a>lower.bound <span class="ot">&lt;-</span> prop.var <span class="sc">/</span> <span class="fu">qf</span>(<span class="fl">0.975</span>, df1, df2)</span>
-<span id="cb117-10"><a href="#cb117-10" tabindex="-1"></a></span>
-<span id="cb117-11"><a href="#cb117-11" tabindex="-1"></a><span class="co"># 計算信賴區間的上限</span></span>
-<span id="cb117-12"><a href="#cb117-12" tabindex="-1"></a>upper.bound <span class="ot">&lt;-</span> prop.var <span class="sc">*</span> <span class="fu">qf</span>(<span class="fl">0.975</span>, df2, df1)</span>
-<span id="cb117-13"><a href="#cb117-13" tabindex="-1"></a></span>
-<span id="cb117-14"><a href="#cb117-14" tabindex="-1"></a><span class="co"># 顯示結果</span></span>
-<span id="cb117-15"><a href="#cb117-15" tabindex="-1"></a><span class="fu">print</span>(lower.bound)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a><span class="co"># 計算樣本方差比值</span></span>
+<span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a>prop.var <span class="ot">&lt;-</span> <span class="fl">182.25</span> <span class="sc">/</span> <span class="fl">457.96</span></span>
+<span id="cb118-3"><a href="#cb118-3" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="#cb118-4" tabindex="-1"></a><span class="co"># 計算自由度</span></span>
+<span id="cb118-5"><a href="#cb118-5" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="dv">11</span> <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb118-6"><a href="#cb118-6" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="dv">16</span> <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb118-7"><a href="#cb118-7" tabindex="-1"></a></span>
+<span id="cb118-8"><a href="#cb118-8" tabindex="-1"></a><span class="co"># 計算信賴區間的下限</span></span>
+<span id="cb118-9"><a href="#cb118-9" tabindex="-1"></a>lower.bound <span class="ot">&lt;-</span> prop.var <span class="sc">/</span> <span class="fu">qf</span>(<span class="fl">0.975</span>, df1, df2)</span>
+<span id="cb118-10"><a href="#cb118-10" tabindex="-1"></a></span>
+<span id="cb118-11"><a href="#cb118-11" tabindex="-1"></a><span class="co"># 計算信賴區間的上限</span></span>
+<span id="cb118-12"><a href="#cb118-12" tabindex="-1"></a>upper.bound <span class="ot">&lt;-</span> prop.var <span class="sc">*</span> <span class="fu">qf</span>(<span class="fl">0.975</span>, df2, df1)</span>
+<span id="cb118-13"><a href="#cb118-13" tabindex="-1"></a></span>
+<span id="cb118-14"><a href="#cb118-14" tabindex="-1"></a><span class="co"># 顯示結果</span></span>
+<span id="cb118-15"><a href="#cb118-15" tabindex="-1"></a><span class="fu">print</span>(lower.bound)</span></code></pre></div>
 <pre><code>## [1] 0.1300441</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a><span class="fu">print</span>(upper.bound)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="fu">print</span>(upper.bound)</span></code></pre></div>
 <pre><code>## [1] 1.401487</code></pre>
 </div>
 <div id="方差比值檢驗" class="section level2">
@@ -2740,21 +2766,181 @@ After 列。<br> paired = TRUE：指定這是一個配對樣本檢驗。<br> alt
 數據文件來進行方差比值的假設檢驗。具體來說，我們將檢驗以下假設： <img src="data:image/png;base64,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Ij4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjE5ODwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOlBpeGVsWERpbWVuc2lvbj44MDQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpVc2VyQ29tbWVudD5TY3JlZW5zaG90PC9leGlmOlVzZXJDb21tZW50PgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KQPZcqgAAABxpRE9UAAAAAgAAAAAAAABjAAAAKAAAAGMAAABjAAA3EVq5i6UAADbdSURBVHgB7J0J3DZT+cfPqywlSopKUraEFpLSQhFS2QpJyZK9/SWKLClLZS3SIlkiSijkldIbUSpbuyQRWrSXELr/1/f4X/M59zyz3fvy/K7P53lm7plzzpz5zcw5137mtIyCSAgIASEgBISAEBACQkAICAEhMAIE5kggGQHquqQQEAJCQAgIASEgBISAEBACEQEJJHoRhIAQEAJCQAgIASEgBISAEBgZAhJIRga9LiwEhIAQEAJCQAgIASEgBISABBK9A0JACAgBISAEhIAQEAJCQAiMDAEJJCODXhcWAkJACAgBISAEhIAQEAJCQAKJ3gEhIASEgBAQAkJACAgBISAERoaABJKRQa8LCwEhIASEgBAQAkJACAgBISCBRO+AEBACQkAICAEhIASEgBAQAiNDQALJyKDXhYWAEBACQkAICAEhIASEgBCQQKJ3QAgIASEgBISAEBACQkAICIGRISCBZGTQ68JCQAgIASEgBISAEBACQkAISCDROyAEhIAQEAJCQAgIASEgBITAyBCQQDIy6HVhISAEhIAQEAJCQAgIASEgBCSQ6B0QAkJACAgBISAEhIAQEAJCYGQISCAZGfS6sBAQAkJACAgBISAEhIAQEAISSPQOCAEhIASEgBAQAkJACAgBITAyBCSQjAx6XVgICAEhIASEgBAQAkJACAgBCSR6B4SAEBACQkAICAEhIASEgBAYGQISSEYGvS4sBISAEBACQkAICAEhIASEgAQSvQNCQAgIASEgBISAEBACQkAIjAwBCSQjg14XFgJCQAgIASEgBISAEBACQkACid4BISAEhIAQEAJCQAgIASEgBEaGgASSkUGvCwsBISAEhIAQEAJCQAgIASEggUTvgBAQAkJACAgBISAEhIAQEAIjQ0ACycig14WFgBAQAkJACAgBISAEhIAQkECid0AICIGRIHDfffeFY489NsybNy/cf//9YfXVVw9z584Nq6666kj6o4sKASEgBISAEBACo0FAAslocNdVhcCsRuB///tf2HLLLcNmm20WtzfffHPYc889w2233RYuuOCC8LKXvWxW46ObFwJCQAgIASEwmxCQQDKbnrbuVQiMCQIXXnhh2H///cPpp58e1lhjjdir888/P+ywww5hxRVXDNddd92Y9FTdEAJCQAgIASEgBAaNgASSQSOs9oWAEJiBwPHHHx8OPPDAsMkmm4Rzzjknnr/nnnvC05/+9Oi+dcMNN4Tll19+Rj0dEAJCQAgIASEgBKYPAQkk0/dMdUdCYOwRuOuuu8LRRx8dttpqq7DOOuvE/uLGtcwyy4QHHngg3HrrrWGxxRYb+/tQB4WAEBACQkAICIHeEZBA0juGakEICIE+IHD99deH9dZbL2y00Ubh3HPP7UOLakIICAEhIASEgBCYBAQkkEzCU1IfhcAsQGCLLbYIV199dbjkkkvC85///Flwx7pFISAEhIAQEAJCAAQkkOg9EAJCYOQInHnmmWHvvfcOZ511Vlh//fVH3h91QAgIASEgBISAEBgeAhJIhoe1riQEhEABAldeeWXYeeedozDyghe8oKCEDgkBISAEhIAQEALTjIAEkml+uro3ITDmCPz85z8PO+20UzjttNPCKqusEnv72c9+Nmy66abhSU960pj3Xt0TAkJACAgBISAE+oGABJJ+oKg2hIAQ6BiBO++8M+y6667hU5/6VHja056W1WdRxMsuuywsssgi2THtCAEhIASEgBAQAtOLgASS6X22ujMhMLYI/OMf/4jZtP7zn/+EJz7xiaHVaoWHHnoo8Pu+++4LP/3pT8e27+qYEBACQkAICAEh0F8EJJD0F0+1JgRmLQLf/va3o2XjjjvuCKwpgpCRJ7JnzZ07NxxxxBHxL3+e36985SvDeeedV3RKx4SAEBACQkAICIEpREACyRQ+VN2SEBgmAn/6059ihqyvfvWrtZdlJfYf//jHteVUQAgIASEgBISAEJg9CEggmT3PWncqBPqOwHXXXRe23HLL8Pe//z1su+22gfgPBBQsHAge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rn/P/qyz3z2es8/0vr/n83nfffbea6+91m/vvdYzr1V6RkEkBISAEBACQkAICAEhIASEgBCYAAKrSCCZAOq6pRAQAkJACAgBISAEhIAQEAIRAQkkehGEgBAQAkJACAgBISAEhIAQmBgCEkgmBr1uLASEgBAQAkJACAgBISAEhIAEEr0DQkAICAEhIASEgBAQAkJACEwMAQkkE4NeNxYCQkAICAEhIASEgBAQAkJAAoneASEgBISAEBACQkAICAEhIAQmhoAEkolBrxsLASEgBISAEBACQkAICAEhIIFE74AQEAJCQAgIASEgBISAEBACE0NAAsnEoNeNhYAQmBYErrzyynDccceFa665Jqy//vph++23D3vvvXdYY401pqWJaocQEAJCQAgIgXmLgASSefto1TEhIASaIHDZZZeFY445Jhx//PFh7bXXDqeffnrc32abbcI555wTVltttSbVqIwQEAJCQAgIASEwIAISSAYETpcJASEwPxDYcsstw+LFi8ORRx6ZCR+bb755uOqqq6JwsvPOO8+PjqoXQkAICAEhIASmFAEJJFP6YNQsISAExoPAeuutF2666aZwxRVXhE033TTe9PDDD48uXLvuums49dRTx9MQ3UUICAEhIASEwAJFQALJAn3w6rYQEAL/j8DZZ58drr766nDooYeG1VdfPR7EfYv9gw46KCxbtkxQCQEhIASEgBAQAiNEQALJCMFV1UJACMwmArvssku4+OKLw/Lly8OiRYtmsxNqtRAQAkJACAiBGUFAAsmMPCg1UwgIgfEgsGLFikBA+w477BDOOuus8dxUdxECQkAICAEhsIARkECygB++ui4EhEA/AjfeeGNYsmRJ2GCDDcKZZ54Z1lxzzf4C2hMCQkAICAEhIAQ6R0ACSeeQqkIhIARmEYH//Oc/YbfddgvrrLNOOPnkk7N4klnsi9osBISAEBACQmCWEJBAMktPS20VAkJgZAgccMABYa211gpHHXVUWGWVVcLKlSvDueeeG/bbb7+R3VMVCwEhIASEgBAQAiFIINFbIASEwIJH4Oijj45rkBxyyCEZFhdccEFgBffDDjssO6YfQkAICAEhIASEQPcISCDpHlPVKASEwAwhQKzIwQcfHDbeeOOw6qqrhptvvjn+XXfddXHF9t13332GeqOmCgEhIASEgBCYPQQkkMzeM1OLhYAQqEDgsssuC5dcckm4/vrrw3//+9/Q6/XmlH74wx8e1xghbmTdddcNbIvo0ksvDZtttlnRKR0TAkJACAgBISAEOkJAAklHQKoaISAEJovA7373u/Dyl788fPKTn6xtyIYbbhi+853v1JZTASEgBISAEBACQmD0CEggGT3GuoMQEAIjRuAb3/hGePrTnx7+/Oc/x0xZW2+9dUBAISgdweN2t7tdOPXUU2OwOquxb7rppuFOd7rTiFul6oWAEBACQkAICIEmCEggaYKSyggBITC1CPz9738PW265Zfj5z38ezjnnnLiooTf297//fbjf/e4XXbKuuuqqcNe73tVPaSsEhIAQEAJCQAhMCQISSKbkQagZQkAIDIbAgQceGBcxfOELXxiD0PO1POEJTwhf/epXwwc+8IGw3Xbb5U/Pi/13vOMd4e53v3t42tOeNi/6o04IASEgBITAwkJAAskAz5sg2V/96lfxSrLy3OUudwl//etfw1/+8pd4DPcQ1jNoQmh3V6xYkRV99KMfHdZYY41sf9gfuLDc4Q53GLaaOdcTLPz+978/7LrrrhNdzRqtOAHJ97nPfea0UQfmPwK4Zd33vveNHf3hD38Y7na3u83p9IMf/OBAxixiSx73uMfNOT/rB7D8POpRjwqvetWr4t+s96dt+xmP3/Wud4V//OMfYfvtt5+psYC20+5b3epWbbs98vJkm2P+gJhDVltttZHfcxpv8Le//S38+9//DmuvvfbImwc/8KMf/SjivcEGG1Tej7JYhImHe9jDHhZuf/vbV5af5pPM4b/97W9jE9dff/2xv2s842uuuSYwVzTlv37zm9+EX/ziF+EhD3nIwDwQPBRW/Mc+9rHhoQ996DQ/orG0TQLJADDfeOONUQjhUgYpmGIWUzvmmGNibTAGr3nNawIDxq1vfevKO8BEPfKRj8zKMBitt9562f4gP97znvfEgerqq6+Okx3t63rCQ4jaZpttYoYiNNOkRv3+979f21wYJ4Q5GMQquv/97x81vmVl3v3udwe0wj/5yU/CkiVLwsc//vGyolFgufjii0vPpye4rzO46XH9nk4Ezj///PjuMZhffvnlcxqJkuCe97xnzLbFdzAOpmJOI0Z84LnPfW4gsxjf3ziYkptuuikceuihcQw86KCDRty7+uo/+MEPxsUrccf71re+NTBzUH+n7kuQxW2fffaJ7Sf19DQx/cRebbXVVrHT4Hrve9+7ewCmvEbm8ve+973hyU9+cjjjjDNG3trNN988oGDYYYcdwllnnVV5vw996ENh3333janKv/3tb4c6AaaysgmfpM/0HZqEa+3JJ58cXv3qV4d11lknwDc1EUpe+9rXhre//e0xHvGKK64YCMF3vvOdgbWvcCv+yle+EohvXMgkgaTB02cw/uhHPxq+9KUvhc985jPhn//8ZyOB5JnPfGb4wQ9+EHAZYQIvYoZGIZB87GMfC8973vOynn3kIx8J2267bbbfxQ/6c/zxx8eq+Hi5B4NoHSHIMNCedNJJlUXf9ra3hb333ru0zGc/+9mw0047xfOsqs3kWTYgo/1oGjvAInhkahLNBgKvf/3rwwknnBBw2zryyCPnNPrss88OS5cujUImge9l9Mc//jF+2+edd1507SorN23HYUQWL14cLSNMqKMkFCww/0zCKAKe8pSnBJiiSRLfNtphtKsnnnhi2GuvvQqbw/sBozEOQqkBRk0IC/NFF10UU0uDLc+yCyKZA+vqDEO8WySHgL73ve9FwX6Y+mbx2tNPPz289KUvjU2/8MILAx4MoyS/H3MqyskinsHvj3vm8uXLo7D04Q9/2A/XbleuXBnalK+tsKYAfNCd73znylJ1AgmWukGzIpK85EEPelDp/fH2QKH1s5/9LDznOc+Jis7Swv87gcXsAQ94QADL173udVGoqLum6Py//vWvOH5haUGhjXJ3QZOZjEU1CLzoRS/qmQtW/LPVm3s2CWb7pn2NVxszlB3jtwktPbN0xGOmce+ZSbLwLiawZNdxDzMDFpZrc9BcAHrGnGf1mhazzeWNyi5atCirf5dddul9/etfz/Ydq6It/TXGqbasZUSqbYcJelk9JkiUljd3uqxcUZvSY8cdd1xpPYOeuOGGG3rPfvaze8Z8xD8T3gatamquMyE96w/9Yn8SZMJjfLbmslN4+yc96UnxvCkSCs9//vOf7xnT1TNXr94d73jHHu/1LNEznvGM3j3ucY8e71jX9IUvfKFni0b2+LZsou5ZjErfd2SMRte3bF2fCaSxTSaU9IxJKL3+MY95TF/b02++69/cqwn99Kc/7ZlFK7aLMeGXv/xlZ23s4ntMx3TathCJeXuLLbaIz4WxZNRkQn8PnoJ3smxMow22xlL27nzuc59r1Szeja7f+ar6mryLppjN2lT0rpnglZ2vulfRuWc961mV+MDT+XUPfOADe2YVLP0zRUOsyxRX2TWMv/B4VX8Wv1jaBnPbinUxB5n7Vmm5hXBCFpIG4ujXvva16BZEUbSCp512Wq2FBNekHXfcMdZuAk04+uijC+80CgsJN0JbihkSwmUFDVdXhK9lulgc7lOYHPGDdLrXve4VU6yybxNvtjgdFhK0OkUaGlxOsD5BeQsJftbLli2L5/wf1ifqgjC1oolJ6ZWvfGXUMOUtJPjc3uY2t8mKoolCUwEZ89W5hQRXDDCC0Hh985vfDMb8xn3+sYDfKaecku1zrqmVBjckr5sK0ES5Ri+rsOQHPuKHH354dGkz5jP6SdvgHa0NJZdkh21wjJY/vg3IGPmA+wkxVeOk973vfeGAAw6I1jTemZQIYt9///2jS8xb3/rW9FT2mxgUXDB5J/AfXnPNNYMxYtn5af7hbpPDaOiq+ke8jWNxi1vcImoEf/3rX0efZ66btIWE75pxh+2xxx4bLWFl/eFdwOe7KTEO+ZjNO4Rfe1OiLC6sdYRbL5ZiYhAZn9G2onVFO25MXN3lhedxX+UZ4UJCauthiEQQWPehH//4x9E9d5j6/FqwNSbQdzvf4l7VpYsyrqCeDAPXSBZVHZZwdfT4nHxdX/7yl4Mx5TEezoSh/Om4z7jP2It3AOnOy8Zd5oa8GxDz3Qte8ILCeusOYqUg3oN5jDm+CeFCvtFGG1UWrbOQmOIoxofR33TurKoUiy7upTw7vv8iYh574hOf2BfHW1TOjzHXvOENb4iujPBuTSnPz6TXwXtgVf3DH/4QsPi/4hWvSE8vqN8SSBo+bgQMGGA+7iuvvDILQOLDZHDIx5DgHuBxDVWTQxuB5BOf+ERsQ5MmY35M3SlwWUiZ8Ko6zLoSTKNfWoSPC8YduuUtbxndNxjkUoGEQC33w2QlbAQKCCbKtBDxd/4fZlNcQaD8B0wsAFmE2tB3v/vd6MaVF0hwkSBNrBMuH9dee23c7VoggbEAF8zC0Fve8pY5k0Eq8FIG5ripeRo3QtPccVkkBn5nIv1Y2RYBwoVmL8PExjsJk1RHCFYwrd63/DOru76L8zA3TNq8HzxXj//B3xuBFOYEYa8Jg4KLyywJJARw847DzN72trftAs6+OnAhghDUmDD5nhFCEF6hSQskMDoI7oxBKEmq3Ftig1v8I0mJJ0j44he/GANXW1xeWxRmCUzNspUxIcTWIZDQH4STIiJmirEUJot3NU+4pqDgqJpz8teU7adjC23r6h1jbhhlPArzdNlcwdhGv9oS4za44sLmrsJN6oBpf/zjHz+nKM8ewXHUlM7Dw94rdZNGEZSfO4apv6lAwjvoCYXq7udK2SqBBIUAigEEHcY7vnnGNb7/l73sZWHPPffsuw0xevQdPgElDXMocw4u/fBYzDMIsPn3j7GT8mXkygnuz5ieFyLLrptvxyWQNHyiHnxEcTRn7q9dJJCgfTjDGCL3M0TT5Ax5/nYILu6nyzmYCxh4ghvzL/Dzn//8+OLn6+h6n/ZUabA8jSr3daYE/3wYb6d0IJy0QMJEkvqQ0lZnXGnvqAQSGHUmI49dwJcVxik/2ExKIEHzW6Q5IhaDwbUJMTkzUUFk4qGv415wEAscwZ0IuzxLtItYiogd2WOPPZp0I5aZJYHEtbZo65g4x0XTJJCQDAQG09zWYuBxlxiMWiDxWAGECvqAhbeJQAIjz9jKOFJktelSICErHQkTYNbQ5rPtglKBBG13fp4b5B7MtcSBQVUCCRYDLNbjIuI8yKSUJ5QkvGNNCM25W9CJDXVBucm1COxdJEpAi8/3huIOxSEWi67eB/oxCYEEXguFGkot5sI3velNEVLn9cyNK1qh0vjTP/3pT1GhikIBK5d7bWBpQfmFsOs8UZPn42XgAx/xiEfE3a6FPb/HLGwlkDR8SryIL37xi2M2FJge1yAXCSRk5iBYEYnb/AtjoFRTM6M356lPfWq83vfZToNAggUD9xzXirP6NX0dtUDCgJi6JqW4lP2GGSUFMxm2LM4lFmMQJQA21S6OSiBxlyFvH0yzxaj4bradhECCKZtUyViP8oSrR9OsIaSdJEuQE++oJzvwY+PaIngyYTKB1LkIFLVplgQSMtzxLaJNq8vkV9TXQY9Ni0CCBdEzQPGduUvNoP3KXzdKgQTmBasejDMMv7vWTptAwliFSyfvVxt3tzyW+f1UILH4h4wRy5drs5+OoVUCCcH+deMTfeUPbTeWjGHI4onCEUccMUwV0V2OORdCI5+6Sw9VcYuL/V3gEjw/cA0chmDmSRDkhBuYWz6wLqQuaCTBwQKORbgrCwlCCApU3MQ3NI8ElFluRceVmefGGIOQkXcvZ27EYgZ/59fQDxQLjEkIx7S5SZIf7z9bEiYwnhfxfmm5+fxbAkmDp0u2ESweTrxwSLEQ5nUyM+Am436/aBBSP1M0mLg9tKGil5KPIE1tij+rE5ozXK2aElkd8At2StdnIK/2G9/4Rj/Vt4X5hAl1oj30Ny+QYBVyly3S+XmMBh8+Zk8EvDwhNMBUQl26/3g2EupFC8EkmFIqkKSakrTMIL8xaTOBOJVNvulkSlkGyFG7bDExl2Ukog24JeKfX0doinj32EII6DDKXWjl6u7d9XkEEr5nt2h1XX9X9V1yySXRKoCllvi0cdK0CCTuagHj8jNzT22y1hK++YzlTQiLNpkEIWKyUi1p1fUI82V+/36dpxhl38dPfk+bQIICBbdfMGau6MryOUmBBJzrCAHizW9+c0xD69bfumtGeR7sJymQMCfDz6DEYpvyHYP2G56JjIZNCIUi/EOXAglKAXg4vnEyMbpyw9vDnIwCerfddouWdngZxhnGP+jTn/50nKe9vG/xLsB6ud9++/W5hfv5qi0uxljC4I8IA0iFsqrr5tM5CSQNnmYd81ZXBZNO23SORQJJ/j4IOb6eBzEfbtbNlyvaTwOt0UigVaojyhB74dYRyvuEmhdIyupCIIGZqMuxXiaQ4J5BEHIV8UG7VgOTahrQjJWFQSalNHgXywnaZyZfmAs0/oMQGlb8h10QQ1hE+1FEkxBIwIBBFaLPTA4E9zmRG51g6SaUt9xRb36Ab1LPpMvMikDCWIKVD+Y6tfSNA79pEUhQXsCotLHm8T6TGniUBBNTpszhvqmbCPsI787o5wUSGKa86yxKDcYUxqz02aNUwTLfpctWOi6y5hNMZBc07QKJ+/Pjbkvc5qgIprhKKeT3ZS5xwQitfpNYKZjb1E3Z62q75V1DoedxN1XxGG3qhg9wiwjXsQaH8y/M/alHCeMd302XAom3FV6iaWxtKhjC76Ru317fMFu+dZLKQF3EgA3TlkldK4GkAfLDCiQERZb5yTIhpQwyzBwTFKbJfGBUvqkMZrQNQpuNVrspYXKFEYbK/FzzdSH0fOpTn+o7PG6BBEww31YR+PFBo9lMF0TEOkIuebfceB2pcObH2DbFJb3Gf+ffGQYaVpMuonELJFincGlyYcmF30022SRqgWhjGysNbnuY4J2qssp5mWncIpDwbhCsP63kC0EWJUcYR5unQSDBpYLMgTBqZL0hoUgTcoGE+CKsulWEC4lrgrF41AV0Yx0nEL1KIMHqgisIrh1OVQKJB+V62aotygQCa7sUSNKxtitGlD5Mu0DCvEGMT5PFCaueSd05FHtNLHt19RSdR8GE8DIsEQ/ryj3qQtnH2IObdpeUel4QT5K3SHqWLfiodI21qjYg5OBpUPXu4nbFwpdNCAuRW1hRhKTuWlXXwzflg+OLyhOnxbzLe9EmjrOorlk9NlaBBI0A5jEkQdwOILTRMEQ8tC6DpLp8IEjnnrEKRtcZFhjc1DzPhONxDgQu+yI3TJpFAYi0kclp0JXaWXyL1UIhsMPM12SAY7IlMI4PDMJsWRfoR5+ZTPNUJpDQjqLnyXPH/Y3FG6uIYN1UUPOy6STpx/JbBBJPWcmED4E/g5rH/qTXMEEyaOWtRMMIJOkAy73wwcUFoojGLZAwAL/kJS/JmoKghMDkDJufQCvnq+f6saItzFhqAcQy5AN3vjzmf9IaYi1i4k/jT/Jlx72PQMKE566X475/3f0YP7FQIpDzPeYF67rruzg/DQJJOmbaOikx7WmTvvn7XeQXnr++bQwJKcdRdlQJJFgdCZhNqUogIdDVLeB+DcwYz58MY6kWmTEPK0lXAgkWuDQOizgSXFZSq4y3qe122gUSH7vbeh20xYHvGea+jsALCxXEYsFNgtoRGBDahyFcQj31db4exgFiccr4mnz5qv282y/WHedr/DoXSHy/zbZKIEljY9rU2aZsG28DXOLIWDqKRB1t2jypsmMTSPj4cJ/BHFdExFlwvoiJLSo/qWNoCzyHN8JUyli79pK2oZ1o4iOZTq5cx8toCyrys5awvDC5OqGV97zxfqxoi4CVpr1tEqRGrvN87AV1lwkkDKKjYJjIoMS7VEW8QwzaTKDgAYOMEFQ1kKN1JZ0pGZs8HoLYiDSlbtU98+c8G44fr8pfP26BhHeGdweCAScQHAHShThvc1kQvp/3LZYWsCVQ0AnNFNqePOFW4pMr7wfvf90qvvk6RrWPQIIioUyY6uq+ZAPi3WxLfH/4tzPBwRBUEc+j6ThSVU/+3DQIJClzkk/hnW9vuj9JgQThHiaDsQvtqr9jVQJJ2nb/7ePKqLNs8a4x5kNoglFe2eKNYdttt/WmDLyddoEEZp73qun4NzAQDS9MXYXGFdSe8jkoIhkXeScYVxi/eB+YM1hdvMmaO1VdzSdGoawryfw6/+aZrxDKmpDHjFUJJIzDnvK/rk54D5TLEG7nVfxEWhf8B99tE0I5j9Ibl2d3qW5y3XwpMzaBhNR3bjEoA69LP9Wyewx7PNUcoTVCg+WMNx8KgzaUulTw8TIhkUYR/08C5pyGEUhgnPkoYKYhTPyejtjrL9rmnwVMOGknywhGE8tEynB62XELJOBY1A5vD1ueB8IihNUIjPKpduPJEf2DQUdj6cQgir8sAdNFlBdIMFenZvKia/wYjH8a2Fy3DgkWChhvF+rwE+e9hDjGOgieH58+FKUp9nunWwTwNBi8jFEkDSXaXYhnQpaTIqtVWvc4fvMNoV0mGJ/n0dSveJC2uQZ2kGubXsO6SWkWm6bX1ZVLBZImloa6+gY5jxLI3TaaJl/gPnmBBOYOC4sTWW7cipm3kCA0o7l1QtjGiutUZSGBAceSztyBNZw1DFygnFaBxN1z0djyh+UfzE844QTv8sDbaRdIfM0xGPFU4dekw7wnntGxSfkmZcYtkPBNoCDGk4IlAHAFhLdB4QpzT+Y19t1TBHdB3oumDHq+zwjq7jHDOeYDUh0Tv+OxiC6QdJVlK9+GJvvpcxhFDAltcDd85mEUhAuNxiaQ4BKSD9DLg+2+7Pnj07CPPyKZqSAmJgZViJU1XROMG4ynUcUHEHMm2iUkZHftYh8rCOlooWEEEq6nXpg6iLgQX4wxHij5lzKFpCX260uKx8M777xzZHBw4Uk/lDKBBG0CjHhK7HPvJm3kg0zjP7weAslYXbuKYKSZ6HGhGzRtI/1qk7UsbQ99Txd/ZIDF/aKM8gJJWbkmx+sEEszsnj2I+thPA/fTd4PzMH8u3LFfRvmsKWW51NFIIUDxzjHppa5jZXWP8vjy5ctjexByEfCxrvGHOwxaOv9uu2wDQmH6DTWpG+sdsTpkb4Fx9nayhfL7pHQe9N2vas80CCQwx+5iisKhSZAvfcoLJL6wovc31aTmBRLGbc90RHnwdYaM/SqBBGsIjB1KHRgrvgFPmzqNAgkKKty/8GWH0YRBR5ACZ1wtfe6i34PQtAskzNtuJW/bvyZZqBB6eQeaEgpNt6iRyKYunimtl/fWFU7p8aLfKKSWJV4sCAMIIyhesYK4QEKabTKNYh0hYQzKHN4JYrnarPtEG4i7YpzC/R2LBsScg0BM27HKMOcvFIHE41lREPMdLjQam0ACk+hBtGUgo9l2Rr+szKSOE5TUhJHOt8+ZUSY7mFyIj9h954cVSDAhegpiAs6w2DiTkm+L75M9xAPgm8ZJnGEuTywcRBBYupBjmUDi90q3XE965Cbaf7T4PkCldbQRSBjIB3VbYQJAkByEnAHxa8v64ufHKZDgqofLHkRaQQSlFCMYdN4JJ9wXYITrCN953hGn1ELox9ItzM5CTGuYYtD0N5M/jA7++yhGJolbKpDgzpimAG/an2HLYWH2tR1I0NA0xXReICFmDNdFLCUoy9CIe9KOvECCPz59hUnAXcOVHt6XKoGEMqwdQewWKdXT771OIKGNWB+dULJAWFt9nEf55W7EXcSQEOOFMA5DiFaYBeLczZO4LzTkw9A0CyQouzx7EokPmsRkggVuPygsm1gmUyXiMDg2uRZLr1u8q8ozV6Ls8KxizBO4gCOMQHmBxOtiPOLdQzEAwSfB3+SVkV4+vyVWhFhYvg23ehLUjhCF4hdXJ75PBOFRZNmiPQhiruDIty/dJ+jcPWCwgjV5N8jYVuV9ktbPbzL0wSfhPeALfebLzOd9CSQNn+6wAkma0i1NVTmsQJIPUK5zYcAMi0uQT2y4D6AVryMGaphXrAbpmirjFkhgRGAWqggNElaASQkkvk6EtxEBrso6mDIofs2g2yoLCcwNE6YTE2PeCsX7wYTsgyETGkwTzEkVoVlL0ysTK8JgLBoeAf/Gy6xOw9+heQ2pQEI8gU/QzWsYvmRqIUHTnAZ3V9WeF0i8LIwQWlmyzGGJgvICCYIE5PeG4WJMdGGoTiDBXcsF//R7rxNIPN4PZRMWlpQQxnAFRUCDmYSGFUhuuOGG6LZJOlSYUA/CR1OOJRWhGHeVfFvSdtX9nmaBBAbb05+nz6auT/5u1Y311AOjX7QOF+ewWMPc8501sUxzTRXxntZZLbDYUsaVlMwLtDF1Wy0TSLg33woMPcpKCMGetP51DDu8D9Ze5iTmDk+ggkCCIhePGb5Hvk2U1aMSSEaZ7awsljICVfBvoVtIkA7HQpYxqWealso/ykwrWXawnknsc/5MU5b1yYIA55w3M2bskpk1e6Ypz8paJp943JjE7Bj42AqxrSAwbXzf9cYgVF6fL2/ah8ry+ZM2WPbdz9wWYhGzfPQdL3rWlme8ZxNzzwa/rKwtEtYz7VL8s4we2XFbwTh/69b7YE7/zCc2q9cGyZ5pgeJxzvmfaSayMuYL2zOTfev7+QW8K2n/zfzspwq35r7TV95SOPdsIG70Z5rMvmvNraTwHhw04bOvrGl6C8suXbq0r1zdO0UlNpH2XWOa1MK6uz6Y4jyO3123v64+Uxz0zP2vZxN3zybOuuIjP2+a8uw5m+/3yO9XdANjjrM2GPNSVKTwmGlj43Vm9es7z/fGu2P+/z2z4sdzlskqu4cxFVl58/EuPE6d1ME96ij93s1lJSturp6xDuYUJ9MMx2Pms++Hsq0JqvGcCQ3ZMd4V2uHzS3ai4Q9jDOP11GEW6uwqc2nsmbY6njOXo+z4ID/oM/XzBxZdUIqpWSoGrpL5mnaZC1GrOizRRLzOrMutrksL88zM9anHHMU8O2piPDEBu2fMf/Y8eM/M7XzOrc3lPpZhW0bMRSY4x3LMQ8zrVeRjCfOxCSdZG/gOILNG9nweMct9PE9bm5IpxWrb7HXBmwzzZ+7HWfttraOsLhPw/RaNts4btX3/GlU+A4XGJpCYxJw9MB+M8lvKzBqZpijrl6UGrmy+aZGzsv6hDSuQmDtHb911183qhemsIgQAx91Mia0Z76YCCeVMe9f3Z1q32DTT9GZtMMtTPMbgaH7K2XHzU53TDYQ10wY2+ksneioyE3RWNwNGStzbNFvZebMYpadb/6btjjHbtgKJaWMb39NcTvruVSaQ0EfTnvaVpW0M8Pm/tO38tvih2vbkBRIGaNHwCMBs8gws48rwlXVQgzMRtGmnnXbqoMb2VThzQhsQ3JtSkUBiWvC+b8IZ+TKBxIUX7n3aaadlt54PAokFEvfMwhrxMKtR1jf/4eM2TGcqpPn5pttpFkhMWx/77/Nz0z7ZOkzxOrOUNb1kTjnGWd6rIuznFB7ygMWx9szCGe/HPS2WtIegX0ZNBBKuRXllFstYr3lTlH6f5v4Yy1isUg8epkggSdvi3zzCmlmOGv35t1olRKX3GOY3ik1w5M88MwauysdXs5ANXMcsXzg2gQSGyNxosofmD8+3nKPMrFEbgYRB3PtrblNRGBhWIAEvS22b1VunteS8t2GQl76pQIJGrYzMLzlrA8IUgoplBMqOMeGZWX/O5TAL3va6rQVN911vAazZtWgR0Tw7IUim9fFMhiFz2eqrj0GmilLtHu0YhUBiK+32tSntb91vJpii55H2Kf9tu2UwLTPNv82NpgczwQTJ87KMf72qd3gcfcFKZ+5zPcuENo7bNbqHT5i8M5MSSFLmpYqJyneoSCCxjIPxuzA31LjluUNFAslPTWNLv12wT624sy6QwBSai0zsn8XL9MwdLQ9f3GfOAAO25t5ZWKbu4LQKJDDpPhZaLFFdN/rOWyxnvHZQYSKdgyymomdp4of6s9Sxfe1Ld7CCYQ30vporVM/cttIic343FUi40ALRe+aeGOtH6ck3lhLflgu+ljUznkq/abeQpNe4QOJtbrOdJYHE4paGeo9SzGbx99hiSHCXM4BmcmFEd/Vj5VbPtOXH8DM1QSru4iNsH4qfilsCtvCTdCJTC4GCBKYSJE9Gj0EXRvQ607UdSL1nH7ef6tuSVIDgTM8gQoYwAhjbEEHzTWJI8BP2dMhF9ZNZw4Pt8JEnIJpMGhB4pGkA/fp8sLgfL9riC4w/tRN+rtzTs6B5jnmeBUGjNkjGokVxFV5H022+nW2D2snahu9pEzJBo2+tlLIYEjJamUa3SZWFZfDx9UQMRQUOPPDAvhSqdeWL6pjUMZv8Y8YY/LfJJMQqzWSQwYebQGaPE+iqffhENwkGNwY44E9NBhqCqNsQWerStLRtrq0qa4xoFmfBGj/4mo+byOpDLBvfrLkXhmOPPbZRE9zP34SqmFiDevj2TQERg9kJ0vd0m0UxJO7fTVIOMsUR5Mp3SjxFXQxJ2sBBYkhM4JmTXIIxk2QSXcSQpNn1zHUlZjlK2+y/GS8ZI8lKRzBzk4X9/FrfTmsMCcHEBBXzPAmibvPdgwXvBbGmzPltiGxtxGMR10l2szR7W5t60rLEHOV5FT/vCUhIjEDsH8sxeIIEL5PfVsWQ5MuyTzwKmTmJRSQ43ZQBWTFS+jIXM7563AnjXBpDUrZSOzFMZWvZZTf43w/i28xyUbhSOzxb03EjX2/RPmO1L57NOlFF7w44VCUkAReC+OGTmX/qlskoasfMH5tFKWpSbUZz3UYypyya/5TsY+rhb2rBmPFwFxYSzKRpuyxgLr1l9tsC0PvKoRVuS00tJJif0Rqmf5Y5I7tdGi9iA1Ffu2xgz8qlP1ILCZYVYxz7/oyRz+rJW0ioJ+82yL5lv8muwRJgAZvpLQf6jata+jwwHVfRqC0k+MVjPk/bZBNB7Cv9Lfoz5q2vPGbyKsItLa0/fdZV103DOWOwYuxXqvHFh5f+NImfadsH3n0sMVV/lvgi+pLznleVKzs3Kpe51EKy4447tu16Z+WxZvF8eHZNKW8hwRpCHe5S6WMB7hd5CwmxHLiL8C3znriLjrt3zrKFBNcz/3bRlteRMXJZeUsLXFd8zvlptJCYcJmNkbiftiVLex4xsXXAWl1KTKe7FvEeYl3AqlD0x/vnz6nofHqMeJ8ywqWIWJGiObLsmjYWEq+D+C6+jyLPl/333z/jgSjf1ELSVQwJFkHHclxb7llFzJnelmFcIqvuMe3nxuayNe1ANGlfFwJJ/j5dCCR5P+gyc61pTLMXnsDtlAHLt6tsv6lA4h9WukUYczLNSWbWTcvgw0swehGlAgntz5O7XVBf2WBLzEp6v/T3IJNrvg3sIwAQnOh1m9a90q901ALJhRdemLWFNsF41RGBjalZn/7w7Mto8eLFfffARWxWyGOwPH6Advu3UhRMPI5+mbY24kmM0DRRKpCYxXhiTfNYON5LYh+aUCqQoDSAueF7wMUS8mfOOEJgtH+/MAdmPYn7lIHMAhv3uT/uPaMWSGBaUfKkfx7vMExQOzE47vNvWuvY79jBin+Mb2ZZyvpvVrKK0nNPTaNAYp4CsT+8EwgnbYlvgffluOOOa3ypeUhk8Z+Wir82ntMTmOByPG4aRCCpamM+zmLcAgk8Bt9yV3+46vl4YZ4nhfWW8TWOk1lgYx24TBYJcV5uPm8lkLR4umjNGKzSPxhjfxHR2Kfn+F0nFXchkNAFXmJvRzpBpd2zdHxZmUH9KrsSSGiXZybxdrO19Lhpk/t+dyGQ8EzcBzy9L9reLgcBfP/T+hE6ymjUAkk6WNImW0egrCl9x53J8n6QUKCIiLVAO+fl2JprX1HRHsyILYbYYwJuy8gUVtjBQXycmUTSbxXhmX4cVpMkooPbz6mCd5TYtEky/HMa9b8DqUAyTEahsvqbHrd0uNn7RpaeJpQKJOYSEa+39QSyS1GSuLY6zZqDlZu4Nhh2c+XKypubYqwDK41/K9yjjtLvne/BqSrLVvpt5X+n432bLFtgaGstxT6wtbTu3pTaLTFltjZOvBbFBQJaU5o2gQSFjSuQCNwfhFwhQ0bHOkLYtTTN2T1JRFIXo0ed80kgyWM0boEkf/90f8WKFT2yhrahLoLaPamPW2zb3H++lJVAMuSTbBPUXnSrrgQSGGqfqAiwyxOTLZOql2FwG4SaCiTUbwvq9f1hnnZCy2Z+t1l7aBcTG4GjZTSsQIJFiHaRUcRx8K3l2B9IM1bWViYcr5ttyjTkr0kZFMp2GdSOpcMtAN6e1BKQb0u67wG/fh2udUWUT/lclumLa10LTZ20C+Z7GglNNG1sOzF10RdPQT2Je1e1H4WMT5pgQypijk2KPHMe7jJNKBVICOLFrSUfQEuQra3C3rvmmmuy7xcLCZayfKAzSQdoAwzMqAQShGQCzKv+0hTlTQUSUpP7uIBSremYkOIMY20xNxEn5sGmmeCmSSAhNa0r89IkBWk/636jyHJ3YRjTKmL+ccszQhBacc8+WXUd57iW724+WEjyfZ0WgYR5mucCj4CbZlMaViBJFSznn39+09vOu3JjDWqf+YCbgg7YixtYTAoiGNAy4gRLTxsDtgkANwY+Bo4RjFVE9iHWBrWzSFVdAJZloQg2qcRb0CbLptV3OwLcCKZ1sgk0LpDo+0VbgqoIuk+pi6B2At2MiciCY9P6bZKM7WTxyDylweLgSTB/SgQlG4MbD+WD2tknKJUg1DIiKQGBjbaeTFmRxsdZ8dk0HVl5W2MnLqqWHUh+pEGuHO4yqJ1AOwL4nXg3zJ3Ndyu3LN5lzFkwQS4rx8rWJjBl+/ywDGZ9i2uaBSRbSbuvoO3wTpmgEw8T4MfzINHCNJExmDHgkiQWFmc01qbxbZA0wqyZWcDnWBuQ3Izv6bzzzovPnyBmvn3GopRYMNMY2rgIGoGxvOcE+I6DPKibxd8IijVGr/K2+aB2+lP07rFQHEHB9Avinaccx/LE4qtgMKqg9vz96vZJ5EH7zW03FI2htJdEJiyyCbESN6tip4lV6u6RnmexXAKyeW95/gRMm1UxrjSdlkt/p0HtLH7HmD8ssUilLz5rSr5GCzeyqCSLIPIe8Kxt3ZXaxfyK2kkAvCeuAQ9z+yoqFo9ZJq9g1uGYpMLcDgMrojclX5SToHv6OE5qG9Tetm1Ng9pZ9Jjn1oQsnieA8XbbbRcsFX+TSyL/QOIOFiTlvWThYObAOiIxCvMFxLtYxu+V1cM3aQJnHGeYE6uC38vqmBfH552INYIO4W9MkC+BjARj7WlxCGhQSZNIfABai6q/Ki1iPiC9aGFEFhOsqn9U51KLhsPa1EJSlDIVTRL9dS2etzu13HAMP17LvDXHhSq1kPi1ZVtiSLDCkBbUU1WmZdGCsABgmjLZzxPAjbZvGBcutF6uCaNe3MTKaJQWEhbr9H6xZbGoNoRbTno930Ge+B7SMlXxI1gEiWFh8bcm7i35e416H4sSVgA03nk/51Hfm/pxHePdRGM2aWItBtJ3moAc0w/jsoRGnO+XP35zDPdEylCW9M/jIiwDbqFuEoicWkjq2siY7e80FpI68pgKnl8dpd97kcsWz58xaJA/d50ssniQbt2tSvQNC1GbdVzK+mUZlbJFE6mXMbUqjWxqIXGMu9xiuakj5llPYkAMTVncZV09nHeXWNy2mhDfdmrVanINZWQh+X8+C8tekz/nzdq6p8NvefpdrP1V/Js/u2EsJMwzWGT4BrqKY/V2zdpWFpIGYmWq0WlQfE4RcwvI0gGjiSL1rGXMCKTdw6rhGujVV189StdsU0Litkk/PTSW3zZZhU022aTvXoNaSNCAoB0nHWBKpLkz94FgAsgcCwJYmWAQ0IBCqYUkraPoNxpLGySCTX5zTpMa1z78sNVWWwVSf5I2E8uIPwe/gBSgpK+l3CBk/ulRw+LXksp4UE2k1zFtW95lNEhoXiFjiIK5QdRqeEiragPwVHWH54+Gnz6gWct/h6NuLN851ie0xqQeFtUjYOvdxBSZWDAsW1xlqvG8haSq9qK0v16edOVYwRm/SW2OBQXLgE3+wTKoxZTAXrZom1pESRvvKZ3R/DLmdEF5C4nF2cR20S+IMY13LG8BH/TetN0UEwHrIsQ3hOWU1NB5SufTJUuWZP3Pl2uzT52WoSpeUmchAXNzcQ6W6TI+Q6ygpHyuIp6tv188d8YG5haLGcksvieddFKwlbarqplzDstDldU+vYBnh9WalLJuvUvPF/1mrmN5gWFpWiwkg/SjjYXE6+cdwUqN94tlnos8ip8r2h555JHRiwXLCN9Cm7mDdPyk5eebgccxhUTRLRbEMQkkDR8zE567A5VdAuOM2w+DPHm0YbZh1nDd8Rd0r732Ks3dj9nXAuzmVM9HkbrdzCkwogMw6eT7T2lQgcS0DsE0Upl7G3UyWSGIuCsEkzl/TmaF6mPMUoGkyGXLr2PLpJRf64EPnfUDzNIVJ6K0PIISTAWmWidcMWAeitw6vEzV1qwzwWJTsiKs44GAM5+IPPIWL5N1ydd3yQ7M0A+LvYpCEkwu7icwHKyzkfZvlN0hTz1uGbxzk1BAjLJvo6obQdiCq6ObkmU4qhwnuxJILrroooDLa55ws2BdoHT9o3wZ9usEEuaR/NhVVE/RMdzlYM7zAokzTLzXrDli1qLCtRKK6mx6zOJdYr3mhx8vKVuLKBVIECJYZ2dYSjGtEkgQJJln+bZxV8Ol1axbjW6/9dZbR4axqLAtEhrOsHVh2hLuW3klXds6qsrXrYFVdW16bloEEuZkd81L21f029J6B+bgQQQS6sNdC7cvXKnSd5T3BWGW9wc+hPVjcJOE2r4HjF9mjYku/qyvYrFqsZ6F+k8CScMnD3OOYADzzB/MLVYOpFr+zOyb+VFXVclgzcI5eWISQ9tiLhD5U1O1P6hAQifoHwvoEcewbNmyuHASE2RKaBuZMFmAy4J6+wQirCwel4EvqS+kmF7vv80kHhdaor188HzoMBEMaGWEFow4GyZvtPwWgB01F2Xl645TH/7VxK9AvCP4ELvFp+76WTiP3yz+sxD9Y1EvFhecJNEerFFMEuZ2FzXX+fbAxCKYOiEIo3lMv00mPpgFfOJHTWjV8PnnHcU6I2qOAN+suc1En2+0zTAKRdSVQEIcDUoKGHAIQWRDW8wUgdLcQ4pu3XcsZZ6LLCRo4Issu32VlOyUxZDQVt4tFDJFVouS6gY6DBOIdRqGsIjQ9LuC7YgjjuhE+Ga+MHe5eDssFczJZUQ8JosX0k5LnVxWbM5xlAVY1mFAYSRRMoI3zLoFxNcuLjinQjvAOIWANiqCR2Eh0GFpWgSSUceQ5HHCgyK/yCGKK4/B8vKMAXg/oMxibmlKJ554YmBcIm4QJUL+Xk3rmS/lJJCM+UliZYGxdoIhx5qCCXYWApmYjBnIndA+MPgT1Mjg6oS7Ur4/MOgElxFwXxX0hesMpn8PFPQ6224xsUPmB9rqUu6PmZvgdrdstaogKYzFBc0aAxuEYGtxSEmJ2f0JYwVzw3OFBnFZ6LL3uDwhzBKkW0cwkO4qgaBMwgO0ibyzPCv+EGZZMZfJeNSEyR7XEQQ6BHZROwRgEGAULe4iWArbwotxd0GphFICS3YV8U6jTYcIls+PA5z3954xPK9YqaobZYll8YpFYES8bsYdGGvqGlQxhSIF4YP3u2qMrWrfQjjHWNFFMP1CwIo+Mo8hOOFeyDvbNZE0wzJsxmqxDvs34fexOI7o9QDDnlor/HzRFld5BHuEMr6HrghvD9w2U4J/q0uqkZb33/BS8E7wOsw/C50kkCz0N0D9HzkCZANzbSHWNZhO9xsf+c1HdAOYMTLKudBnKYGjQNqGMeuyabQDARKBnzgQhECYDlyuEDywaFoa6sjsMdlhjeAZwATCmLAtIjS9uBqOkhB8bMX16N5HPJNICAgBISAEhMBCQ0ACyUJ74urv2BHARYH4FHfxIKCS+JhZJuJ5UuYZd5V8OuBx9Q+NM+kzSbGN7z1acie0erbYXRQ4sExijZw2wo0GtyMEJ2ltp+3pqD1CQAgIASEwDgQkkIwDZd1DCAiBkSFAXBJuV2Rxw8UqT7iVWarV6C6Ii+E0ETEEWGAsxW6wlLnT1DS1RQgIASEgBITA2BCQQDI2qHUjISAEukYAtyzPSMUio0XpMPF5xi2K2BLczKaJCGokG5G7lU1T29QWISAEhIAQEALjQkACybiQ1n2EgBDoHIHzzz8/Bp2TSe3yyy+fUz/BkGREItsWLl2TzgCWb6AHMne1/kS+fu0LASEgBISAEJgFBCSQzMJTUhuFgBAoRIBUn6TixG2LdM15YtHNpUuXRiuKB+Dny2hfCAgBISAEhIAQmCwCEkgmi7/uLgSEwBAIkK6X9QHKFsUjBz9r2xA0nga7p7dkrRGuJxUri5qyMi/r1rAKt0gICAEhIASEgBAYPQISSEaPse4gBITAiBBg/QkWqkKAYKXblFjzhjVf9tlnnxinkZ7z3yyiSCD88ccfH925Tj/99LiP8ELGroW+UJXjpK0QEAJCQAgIgVEiIIFklOiqbiEgBEaKAAtqbbHFFoFYkYsuuigLcD/jjDPiytlYSE455ZS4GF5RQ0gXvHjx4uju5cIHa6qQIhjhZNbTMxf1WceEgBAQAkJACEwbAhJIpu2JqD1CQAi0QoAVfvfdd9+wYsWKuMAgK/Syai6xI3vssUdlXazYfdNNN4UrrrgiLpZI4cMPPzy6cO26665xMcXKCnRSCAgBISAEhIAQGBoBCSRDQ6gKhIAQmAYErr/++nDttdfGxQ832mijRk0i6P3qq6+Oa4CwgjuE+xZrghx00EFh2bJl8Zj+CQEhIASEgBAQAqNDQALJ6LBVzUJACMwgArvssku4+OKLw/Lly8OiRYtmsAdqshAQAkJACAiB2UJAAslsPS+1VggIgREigNsXAe077LBDOOuss0Z4J1UtBISAEBACQkAIOAISSBwJbYWAEFjQCNx4441hyZIlYYMNNghnnnlmWHPNNRc0Huq8EBACQkAICIFxISCBZFxI6z5CQAhMLQKsmL7bbruFddZZJ5x88snB40mmtsFqmBAQAkJACAiBeYSABJJ59DDVFSEgBAZDgLVM1lprrXDUUUeFVVZZJaxcuTKce+65Yb/99husQl0lBISAEBACQkAINEZAAkljqFRQCAiB+YjA0UcfHRdAPOSQQ7LuXXDBBYEV3A877LDsmH4IASEgBISAEBACo0FAAslocFWtQkAIzAACxIocfPDBYeONNw6rrrpquPnmm+PfddddF1ds33333WegF2qiEBACQkAICIHZRkACyWw/P7VeCAiBAREgbmTdddcNbIvo0ksvDZtttlnRKR0TAkJACAgBISAEOkRAAkmHYKoqISAEhIAQEAJCQAgIASEgBNohIIGkHV4qLQSEgBAQAkJACAgBISAEhECHCEgg6RBMVSUEhIAQEAJCQAgIASEgBIRAOwQkkLTDS6WFgBAQAkJACAgBISAEhIAQ6BABCSQdgqmqhIAQEAJCQAgIASEgBISAEGiHgASSdniptBAQAkJACAgBISAEhIAQEAIdIiCBpEMwVZUQEAJCQAgIASEgBISAEBAC7RCQQNIOL5UWAkJACAgBISAEhIAQEAJCoEMEJJB0CKaqEgJCQAgIASEgBISAEBACQqAdAhJI2uGl0kJACAgBISAEhIAQEAJCQAh0iIAEkg7BVFVCQAgIASEgBISAEBACQkAItENAAkk7vFRaCAgBISAEhIAQEAJCQAgIgQ4RkEDSIZiqSggIASEgBISAEBACQkAICIF2CEggaYeXSgsBISAEhIAQEAJCQAgIASHQIQISSDoEU1UJASEgBISAEBACQkAICAEh0A4BCSTt8FJpISAEhIAQEAJCQAgIASEgBDpEQAJJh2CqKiEgBISAEBACQkAICAEhIATaISCBpB1eKi0EhIAQEAJCQAgIASEgBIRAhwhIIOkQTFUlBISAEBACQkAICAEhIASEQDsEJJC0w0ulhYAQEAJCQAgIASEgBISAEOgQAQkkHYKpqoSAEBACQkAICAEhIASEgBBoh4AEknZ4qbQQEAJCQAgIASEgBISAEBACHSIggaRDMFWVEBACQkAICAEhIASEgBAQAu0Q+D+NMqAz5b/AwQAAAABJRU5ErkJggg==" title="假設" alt="假設" /></p>
 <div id="a.-計算檢驗統計量" class="section level4">
 <h4>A. 計算檢驗統計量</h4>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" tabindex="-1"></a><span class="co"># 計算樣本 F 統計量</span></span>
-<span id="cb121-2"><a href="#cb121-2" tabindex="-1"></a>sample.F <span class="ot">&lt;-</span> <span class="fu">var</span>(fund.returns.df[,<span class="st">&quot;Metals&quot;</span>]) <span class="sc">/</span> <span class="fu">var</span>(fund.returns.df[,<span class="st">&quot;Income&quot;</span>])</span>
-<span id="cb121-3"><a href="#cb121-3" tabindex="-1"></a></span>
-<span id="cb121-4"><a href="#cb121-4" tabindex="-1"></a><span class="co"># 顯示樣本 F 統計量</span></span>
-<span id="cb121-5"><a href="#cb121-5" tabindex="-1"></a><span class="fu">print</span>(sample.F)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" tabindex="-1"></a><span class="co"># 計算樣本 F 統計量，它是兩個樣本方差的比值</span></span>
+<span id="cb122-2"><a href="#cb122-2" tabindex="-1"></a>sample.F <span class="ot">&lt;-</span> <span class="fu">var</span>(fund.returns.df[,<span class="st">&quot;Metals&quot;</span>]) <span class="sc">/</span> <span class="fu">var</span>(fund.returns.df[,<span class="st">&quot;Income&quot;</span>])</span>
+<span id="cb122-3"><a href="#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="#cb122-4" tabindex="-1"></a><span class="co"># 顯示樣本 F 統計量</span></span>
+<span id="cb122-5"><a href="#cb122-5" tabindex="-1"></a><span class="fu">print</span>(sample.F)</span></code></pre></div>
 <pre><code>## [1] 11.25539</code></pre>
 </div>
 <div id="b.計算-p-值" class="section level4">
 <h4>B.計算 p 值</h4>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" tabindex="-1"></a><span class="co"># 計算 p 值</span></span>
-<span id="cb123-2"><a href="#cb123-2" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pf</span>(sample.F, <span class="dv">9</span>, <span class="dv">9</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb123-3"><a href="#cb123-3" tabindex="-1"></a></span>
-<span id="cb123-4"><a href="#cb123-4" tabindex="-1"></a><span class="co"># 顯示 p 值</span></span>
-<span id="cb123-5"><a href="#cb123-5" tabindex="-1"></a><span class="fu">print</span>(pvalue)</span></code></pre></div>
+<p>使用 pf() 函數來計算與樣本 F 統計量相關的 p
+值。由於這是雙尾檢驗，我們需要將計算出的概率乘以 2。</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" tabindex="-1"></a><span class="co"># 計算 p 值</span></span>
+<span id="cb124-2"><a href="#cb124-2" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pf</span>(sample.F, <span class="dv">9</span>, <span class="dv">9</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb124-3"><a href="#cb124-3" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="#cb124-4" tabindex="-1"></a><span class="co"># 顯示 p 值</span></span>
+<span id="cb124-5"><a href="#cb124-5" tabindex="-1"></a><span class="fu">print</span>(pvalue)</span></code></pre></div>
 <pre><code>## [1] 0.001317916</code></pre>
+</div>
+</div>
+</div>
+<div id="chapter-12" class="section level1">
+<h1>Chapter 12</h1>
+<p>Chapter12.xlsx <a href="https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&amp;ouid=110553448349846752071&amp;rtpof=true&amp;sd=true">下載點</a></p>
+<div id="安裝載入套件讀檔-5" class="section level2">
+<h2>1.安裝、載入套件&amp;讀檔</h2>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb126-2"><a href="#cb126-2" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
+<span id="cb126-3"><a href="#cb126-3" tabindex="-1"></a><span class="fu">library</span>(fBasics)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;fBasics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:EnvStats&#39;:
+## 
+##     kurtosis, skewness</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" tabindex="-1"></a><span class="co"># 讀取檔案</span></span>
+<span id="cb129-2"><a href="#cb129-2" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">&quot;/Users/bear/dev/R/Statistics/Data Files/Chapter12.xlsx&quot;</span> <span class="co"># 更改成您要讀取之xlsx的路徑</span></span>
+<span id="cb129-3"><a href="#cb129-3" tabindex="-1"></a>sheet_name_1 <span class="ot">&lt;-</span> <span class="st">&quot;Household_Income&quot;</span> <span class="co">#這裡輸入您要讀取的sheet的名稱</span></span>
+<span id="cb129-4"><a href="#cb129-4" tabindex="-1"></a></span>
+<span id="cb129-5"><a href="#cb129-5" tabindex="-1"></a><span class="co"># 使用read.xlsx函數讀取指定的工作表</span></span>
+<span id="cb129-6"><a href="#cb129-6" tabindex="-1"></a>household.income.df <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(file_path, <span class="at">sheet =</span> sheet_name_1)</span>
+<span id="cb129-7"><a href="#cb129-7" tabindex="-1"></a><span class="fu">summary</span>(household.income.df)</span></code></pre></div>
+<pre><code>##  Household.Income
+##  Min.   : 14.0   
+##  1st Qu.: 38.0   
+##  Median : 57.0   
+##  Mean   : 63.8   
+##  3rd Qu.: 78.0   
+##  Max.   :250.0</code></pre>
+</div>
+<div id="適配度檢驗" class="section level2">
+<h2>2.適配度檢驗</h2>
+<p>使用範例 12.1
+來進行適配度檢驗，檢查觀察到的數據是否符合假設的分布。<br /></p>
+<div id="a.-輸入數據" class="section level3">
+<h3>A. 輸入數據</h3>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" tabindex="-1"></a><span class="co"># 輸入觀察到的客戶數量</span></span>
+<span id="cb131-2"><a href="#cb131-2" tabindex="-1"></a>number.customers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">60</span>, <span class="dv">54</span>, <span class="dv">16</span>)</span>
+<span id="cb131-3"><a href="#cb131-3" tabindex="-1"></a></span>
+<span id="cb131-4"><a href="#cb131-4" tabindex="-1"></a><span class="co"># 輸入市場份額分布</span></span>
+<span id="cb131-5"><a href="#cb131-5" tabindex="-1"></a>market.share <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.40</span>, <span class="fl">0.32</span>, <span class="fl">0.24</span>, <span class="fl">0.04</span>)</span></code></pre></div>
+</div>
+<div id="b.-進行卡方適配度檢驗" class="section level3">
+<h3>B. 進行卡方適配度檢驗</h3>
+<div id="具體步驟" class="section level4">
+<h4>具體步驟：</h4>
+<ol style="list-style-type: decimal">
+<li>準備數據: 我們已經在上一部分中準備好了 number.customers 和
+market.share 兩個向量。<br></li>
+<li>運行檢驗: 在這裡，我們將 number.customers 作為第一個參數，並將 p
+設置為 market.share，這樣 R 會將這些預期概率用於檢驗。<br></li>
+</ol>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a><span class="co"># 進行卡方適配度檢驗</span></span>
+<span id="cb132-2"><a href="#cb132-2" tabindex="-1"></a>chisq.test.result <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(number.customers, <span class="at">p =</span> market.share)</span>
+<span id="cb132-3"><a href="#cb132-3" tabindex="-1"></a></span>
+<span id="cb132-4"><a href="#cb132-4" tabindex="-1"></a><span class="co"># 顯示結果</span></span>
+<span id="cb132-5"><a href="#cb132-5" tabindex="-1"></a><span class="fu">print</span>(chisq.test.result)</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  number.customers
+## X-squared = 10.25, df = 3, p-value = 0.01656</code></pre>
+</div>
+</div>
+</div>
+<div id="獨立性檢驗" class="section level2">
+<h2>3.獨立性檢驗</h2>
+<p>基於表 12.8
+中的數據，使用卡方檢驗來檢查性別和車輛類型之間是否存在獨立性。<br> ###
+A. 構建列聯表</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a><span class="co"># 輸入數據</span></span>
+<span id="cb134-2"><a href="#cb134-2" tabindex="-1"></a>female <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>)</span>
+<span id="cb134-3"><a href="#cb134-3" tabindex="-1"></a>male <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">120</span>, <span class="dv">170</span>)</span>
+<span id="cb134-4"><a href="#cb134-4" tabindex="-1"></a></span>
+<span id="cb134-5"><a href="#cb134-5" tabindex="-1"></a><span class="co"># 創建列聯表</span></span>
+<span id="cb134-6"><a href="#cb134-6" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">rbind</span>(female, male)</span>
+<span id="cb134-7"><a href="#cb134-7" tabindex="-1"></a></span>
+<span id="cb134-8"><a href="#cb134-8" tabindex="-1"></a><span class="co"># 為列聯表命名列</span></span>
+<span id="cb134-9"><a href="#cb134-9" tabindex="-1"></a><span class="fu">colnames</span>(table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;economy.car&quot;</span>, <span class="st">&quot;noneconomy.car&quot;</span>)</span>
+<span id="cb134-10"><a href="#cb134-10" tabindex="-1"></a></span>
+<span id="cb134-11"><a href="#cb134-11" tabindex="-1"></a><span class="co"># 顯示列聯表</span></span>
+<span id="cb134-12"><a href="#cb134-12" tabindex="-1"></a><span class="fu">print</span>(table)</span></code></pre></div>
+<pre><code>##        economy.car noneconomy.car
+## female          50             60
+## male           120            170</code></pre>
+<div id="b.-進行卡方獨立性檢驗" class="section level3">
+<h3>B. 進行卡方獨立性檢驗</h3>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="co"># 進行卡方獨立性檢驗</span></span>
+<span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a>chisq.test.result <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(table, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb136-3"><a href="#cb136-3" tabindex="-1"></a></span>
+<span id="cb136-4"><a href="#cb136-4" tabindex="-1"></a><span class="co"># 顯示結果</span></span>
+<span id="cb136-5"><a href="#cb136-5" tabindex="-1"></a><span class="fu">print</span>(chisq.test.result)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  table
+## X-squared = 0.54198, df = 1, p-value = 0.4616</code></pre>
+</div>
+</div>
+</div>
+<div id="chapter-14" class="section level1">
+<h1>Chapter 14</h1>
+<p>Chapter14.xlsx <a href="https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&amp;ouid=110553448349846752071&amp;rtpof=true&amp;sd=true">下載點</a></p>
+<div id="安裝載入套件讀檔-6" class="section level2">
+<h2>1.安裝、載入套件&amp;讀檔</h2>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="co"># 載入套件</span></span>
+<span id="cb138-2"><a href="#cb138-2" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb138-3"><a href="#cb138-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb138-4"><a href="#cb138-4" tabindex="-1"></a></span>
+<span id="cb138-5"><a href="#cb138-5" tabindex="-1"></a><span class="co"># 讀取檔案</span></span>
+<span id="cb138-6"><a href="#cb138-6" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">&quot;/Users/bear/dev/R/Statistics/Data Files/Chapter14.xlsx&quot;</span> <span class="co"># 更改成您要讀取之xlsx的路徑</span></span>
+<span id="cb138-7"><a href="#cb138-7" tabindex="-1"></a>sheet_name_1 <span class="ot">&lt;-</span> <span class="st">&quot;Debt_Payments&quot;</span> <span class="co">#這裡輸入您要讀取的sheet的名稱</span></span>
+<span id="cb138-8"><a href="#cb138-8" tabindex="-1"></a></span>
+<span id="cb138-9"><a href="#cb138-9" tabindex="-1"></a><span class="co"># 使用read.xlsx函數讀取指定的工作表</span></span>
+<span id="cb138-10"><a href="#cb138-10" tabindex="-1"></a>debt.payments.df <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(file_path, <span class="at">sheet =</span> sheet_name_1)</span>
+<span id="cb138-11"><a href="#cb138-11" tabindex="-1"></a><span class="fu">summary</span>(debt.payments.df)</span></code></pre></div>
+<pre><code>##  Metropolitan.area       Debt            Income        Unemployment   
+##  Length:26          Min.   : 763.0   Min.   : 59.40   Min.   : 6.300  
+##  Class :character   1st Qu.: 888.2   1st Qu.: 68.22   1st Qu.: 8.325  
+##  Mode  :character   Median : 987.5   Median : 71.50   Median : 9.300  
+##                     Mean   : 983.5   Mean   : 74.05   Mean   : 9.765  
+##                     3rd Qu.:1068.2   3rd Qu.: 78.30   3rd Qu.:10.275  
+##                     Max.   :1285.0   Max.   :103.50   Max.   :15.700</code></pre>
+</div>
+<div id="簡單線性迴歸分析" class="section level2">
+<h2>2.簡單線性迴歸分析</h2>
+<p>範例14.4，使用 debt.payments.df
+數據文件來估計一個簡單線性迴歸模型，並生成相關的回歸和 ANOVA
+表。<br /></p>
+<div id="a.-輸入數據-1" class="section level3">
+<h3>A. 輸入數據</h3>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="co"># 構建線性迴歸模型</span></span>
+<span id="cb140-2"><a href="#cb140-2" tabindex="-1"></a><span class="co"># 首先，我們使用 lm() 函數來構建一個線性模型對象。這個模型將債務 (Debt) 作為應變量，收入 (Income) 作為自變量。</span></span>
+<span id="cb140-3"><a href="#cb140-3" tabindex="-1"></a>debt.income.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Debt <span class="sc">~</span> Income, <span class="at">data =</span> debt.payments.df)</span></code></pre></div>
+</div>
+<div id="b.-進行卡方適配度檢驗-1" class="section level3">
+<h3>B. 進行卡方適配度檢驗</h3>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" tabindex="-1"></a><span class="co"># 使用 summary() 函數來獲取回歸模型的摘要，包括係數估計、標準誤差、t 值和顯著性水平等信息。</span></span>
+<span id="cb141-2"><a href="#cb141-2" tabindex="-1"></a><span class="fu">summary</span>(debt.income.lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Debt ~ Income, data = debt.payments.df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -107.087  -38.767   -5.828   50.137  101.619 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  210.298     91.339   2.302   0.0303 *  
+## Income        10.441      1.222   8.544 9.66e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 63.26 on 24 degrees of freedom
+## Multiple R-squared:  0.7526, Adjusted R-squared:  0.7423 
+## F-statistic:    73 on 1 and 24 DF,  p-value: 9.66e-09</code></pre>
 </div>
 </div>
 </div>

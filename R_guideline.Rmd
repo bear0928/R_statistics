@@ -38,10 +38,6 @@ getwd()
 
 ```
 
-
-
-
-
 # Chapter 2
 
 Chapter 2 - R markdown檔案 [下載點](https://drive.google.com/file/d/1JJa5F2DwkJ8Szw5mhVzfSns4wEOGj2JE/view?usp=sharing)
@@ -716,13 +712,29 @@ summary(fund.returns.df)
 ```
 
 ## 2.信賴區間計算 σ²
-
 使用 varTest() 函數來計算方差的置信區間：
 ```{r 11-2}
 result <- varTest(fund.returns.df[, "Metals"])
 print(result)
 ```
 
+```
+varTest() 函數的主要輸入值：
+1. x:
+  數據向量，表示需要進行方差檢定的樣本。
+  如果是雙樣本檢定，這裡可以是第一個樣本數據的向量。
+2. y (可選):
+  另一個數據向量，用於雙樣本檢定。如果提供了這個向量，則檢驗兩個樣本的方差是否相等。
+  sigma.squared (可選):
+  方差的理論值，用於單樣本檢定。默認值為 1。
+3. alternative (可選):
+  定義備擇假設的類型。選項有：
+  "two.sided"（雙側檢定，默認）
+  "less"（左側檢定）
+  "greater"（右側檢定）
+4. conf.level (可選):
+  信賴區間的置信水平，默認為 0.95（即 95% 信賴區間）。
+```
 ## 3.檢驗 σ²
 
 使用範例 11.4 和 fund.returns.df 數據文件中的 "Income" 變量來進行方差檢驗。我們的假設檢驗形式如下：<br/>
@@ -763,7 +775,7 @@ print(upper.bound)
 
 #### A. 計算檢驗統計量
 ```{r 11-5}
-# 計算樣本 F 統計量
+# 計算樣本 F 統計量，它是兩個樣本方差的比值
 sample.F <- var(fund.returns.df[,"Metals"]) / var(fund.returns.df[,"Income"])
 
 # 顯示樣本 F 統計量
@@ -771,15 +783,121 @@ print(sample.F)
 ```
 
 #### B.計算 p 值
+使用 pf() 函數來計算與樣本 F 統計量相關的 p 值。由於這是雙尾檢驗，我們需要將計算出的概率乘以 2。
 ```{r 11-6}
 # 計算 p 值
 pvalue <- 2 * pf(sample.F, 9, 9, lower.tail = FALSE)
 
 # 顯示 p 值
 print(pvalue)
-
 ```
 
+# Chapter 12
+
+Chapter12.xlsx [下載點](https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r 12-1}
+library(openxlsx)
+library(nortest)
+library(fBasics)
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter12.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Household_Income" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+household.income.df <- read.xlsx(file_path, sheet = sheet_name_1)
+summary(household.income.df)
+```
+
+## 2.適配度檢驗
+使用範例 12.1 來進行適配度檢驗，檢查觀察到的數據是否符合假設的分布。<br/>
+
+
+### A. 輸入數據
+```{r 12-2A}
+# 輸入觀察到的客戶數量
+number.customers <- c(70, 60, 54, 16)
+
+# 輸入市場份額分布
+market.share <- c(0.40, 0.32, 0.24, 0.04)
+```
+
+### B. 進行卡方適配度檢驗
+#### 具體步驟：
+
+1. 準備數據: 我們已經在上一部分中準備好了 number.customers 和 market.share 兩個向量。<br>
+2. 運行檢驗: 在這裡，我們將 number.customers 作為第一個參數，並將 p 設置為 market.share，這樣 R 會將這些預期概率用於檢驗。<br>
+```{r 12-2B}
+
+# 進行卡方適配度檢驗
+chisq.test.result <- chisq.test(number.customers, p = market.share)
+
+# 顯示結果
+print(chisq.test.result)
+```
+
+## 3.獨立性檢驗
+基於表 12.8 中的數據，使用卡方檢驗來檢查性別和車輛類型之間是否存在獨立性。<br>
+### A. 構建列聯表
+```{r 12-3A}
+# 輸入數據
+female <- c(50, 60)
+male <- c(120, 170)
+
+# 創建列聯表
+table <- rbind(female, male)
+
+# 為列聯表命名列
+colnames(table) <- c("economy.car", "noneconomy.car")
+
+# 顯示列聯表
+print(table)
+```
+
+### B. 進行卡方獨立性檢驗
+```{r 12-3B}
+# 進行卡方獨立性檢驗
+chisq.test.result <- chisq.test(table, correct = FALSE)
+
+# 顯示結果
+print(chisq.test.result)
+```
+
+# Chapter 14
+
+Chapter14.xlsx [下載點](https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r 14-1}
+# 載入套件
+library(openxlsx)
+library(ggplot2)
+
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter14.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Debt_Payments" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+debt.payments.df <- read.xlsx(file_path, sheet = sheet_name_1)
+summary(debt.payments.df)
+```
+
+## 2.簡單線性迴歸分析
+範例14.4，使用 debt.payments.df 數據文件來估計一個簡單線性迴歸模型，並生成相關的回歸和 ANOVA 表。<br/>
+
+### A. 輸入數據
+```{r 14-2A}
+# 構建線性迴歸模型
+# 首先，我們使用 lm() 函數來構建一個線性模型對象。這個模型將債務 (Debt) 作為應變量，收入 (Income) 作為自變量。
+debt.income.lm <- lm(Debt ~ Income, data = debt.payments.df)
+```
+
+### B. 進行卡方適配度檢驗
+```{r 14-2B}
+# 使用 summary() 函數來獲取回歸模型的摘要，包括係數估計、標準誤差、t 值和顯著性水平等信息。
+summary(debt.income.lm)
+```
 # 參考資料
 
 **Textbook**<br>
