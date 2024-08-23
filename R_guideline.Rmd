@@ -537,7 +537,7 @@ conf.interval <- c(pbar - margin.of.error, pbar + margin.of.error)
 conf.interval
 ```
 
-# Chapter 9
+# Chapter 9 Hypothesis Testing
 
 Chapter9.xlsx [下載點](https://docs.google.com/spreadsheets/d/1KyHUSv7p4YvgKpVaQGBZrQhVcQZd0Xyh/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
@@ -560,28 +560,59 @@ debit.spending.df <- read.xlsx(file_path, sheet = sheet_name_1)
 mi.life.expectancy.df <- read.xlsx(file_path, sheet = sheet_name_2)
 ```
 
-### 對dataframe使用summary()函數
+### 用head()查看dataframe前六筆資料
 
 ```{r 9-2}
-summary(debit.spending.df)
+head(debit.spending.df)
 ```
 
 ```{r 9-3}
-summary(mi.life.expectancy.df)
+head(mi.life.expectancy.df)
 ```
 
 ## 2. σ 已知時， 檢驗 μ
+#### I.假設
+```
+H_0(虛無假設):  μ = 8000
+H_A(對立假設) : μ < 8000 (左尾檢定)
+```
+#### II. 設定 α 值
+```
+α = 0.05
+```
+#### III. 計算z統計量
 ```{r 9-4, message=FALSE, warning=FALSE}
 # 使用 debit.spending.df 數據文件來說明如何在已知 σ 的情況下檢驗 μ 的方法
 # 使用 BSDA 包中的 z.test() 函數
-# 因為對立假設是 H_A : μ < 8000，所以我們設置 μ = 8000 並將 alternative 選項設置為 "less"
+# 因為對立假設是μ < 8000 (左尾檢定)，所以我們設置 μ = 8000 並將 alternative 選項設置為 "less"
 # 將標準差 sigma.x 設置為 500
 
 # 執行 z 檢驗
-z.test(debit.spending.df[, "Spending"], mu = 8000, sigma.x = 500, alternative = "less")
+z.test(debit.spending.df[, "Spending"], 
+       mu = 8000, sigma.x = 500, 
+       alternative = "less")
 ```
-
+#### IV. 是否拒絕H_0
+```
+p-value = 0.1149 > 0.05 = α
+我們無法拒絕H_0
+```
+#### V. 結論
+```
+根據檢定結果，我們無法拒絕H_0，這意味著目前的數據不足以支持H_A。
+換句話說，我們沒有足夠的證據表明Spending的母體平均數 μ 小於 8000。
+```
 ## 3. σ 未知時， 檢驗 μ
+#### I.假設
+```
+H_0(虛無假設):  μ = 81.48
+H_A(對立假設) : μ < 81.48 (左尾檢定)
+```
+#### II. 設定 α 值
+```
+α = 0.05
+```
+#### III. 計算z統計量
 ```{r 9-5, message=FALSE, warning=FALSE}
 # 使用 mi.life.expectancy.df 數據文件來說明如何在未知 σ 的情況下估計 μ 的方法
 # 使用 BSDA 包中的 t.test() 函數
@@ -590,9 +621,21 @@ z.test(debit.spending.df[, "Spending"], mu = 8000, sigma.x = 500, alternative = 
 # 執行 t 檢驗
 t.test(mi.life.expectancy.df[, "Age"], mu = 81.48, alternative = "less")
 ```
+#### IV. 是否拒絕H_0
+```
+p-value = 9.136e-06 < 0.05 = α
+我們拒絕H_0，並接受對立假設
+```
+#### V. 結論
+```
+根據檢定結果，我們拒絕H_0，這意味著目前的數據足以支持H_A。
+換句話說，我們沒有足夠的證據表明Age的母體平均數 μ 小於 81.48。
+```
 
 ## 4.檢驗 p
 **使用範例9.14來說明如何檢驗 p**<br>
+
+
 
 ### A. 計算樣本比例
 ```{r 9-6A, message=FALSE, warning=FALSE}
@@ -602,8 +645,7 @@ trials <- 180
 pbar <- successes / trials
 ```
 
-### B. 計算樣本 z 統計量
-
+### B. 計算 z 統計量
 使用公式計算 z 統計量：
 ![公式1](/Users/bear/dev/R/Statistics/zfor.png "統計量")
 ```{r 9-6B, message=FALSE, warning=FALSE}
@@ -619,7 +661,7 @@ p.value <- pnorm(z.statistic)
 p.value
 ```
 
-# Chapter 10
+# Chapter 10 Statistical Inference Concerning Two Populations
 
 Chapter10.xlsx [下載點](https://docs.google.com/spreadsheets/d/1McirZ6yGPMRtXTL0bSDElsu5fHRfaMau/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
@@ -637,64 +679,94 @@ food.calories.df <- read.xlsx(file_path, sheet = sheet_name_2)
 ```
 
 ```{r 10-2}
-summary(gold.oil.df)
+head(gold.oil.df)
 ```
 
 ```{r 10-3}
-summary(food.calories.df)
+head(food.calories.df)
 ```
 
 ## 2.測試 μ1 - μ2 的方法
 
 
-#### 1.簡介
-我們的目標是檢驗兩個獨立樣本的均值差異是否為零。具體來說，我們的零假設 (H0) 是 μ1 - μ2 = 0，而對立假設 (HA) 是 μ1 - μ2 ≠ 0。這表示我們希望檢查 Gold 和 Oil 兩個變數的均值是否存在顯著差異。
+#### I.假設
+```
+H_0(虛無假設):  μ1 - μ2 = 0 
+H_A(對立假設) : μ1 - μ2 ≠ 0 （雙尾檢定）
+```
 
-#### 2.使用 t.test() 函數
-在 R 語言中，我們可以使用 t.test() 函數來進行這個檢驗。此函數會進行雙尾 t 檢驗，假設樣本獨立且方差不相等（這是 t.test() 函數的預設設置）。<br>
+#### II. 設定 α 值
+```
+α = 0.05
+```
 
-#### 3.程式碼與程式碼解釋
-gold.oil.df[, "Gold"]：選取 gold.oil.df 數據框中的 Gold 列。<br>
-gold.oil.df[, "Oil"]：選取 gold.oil.df 數據框中的 Oil 列。<br>
-這段代碼會比較 Gold 和 Oil 兩組數據的均值，進行雙尾 t 檢驗。<br>
+#### III. 計算 t 統計量
 
 ```{r 10-4}
 # 範例 10.4
+# 使用 gold.oil.df 數據文件來檢驗 Gold 和 Oil 兩個變數的均值是否存在顯著差異
+# 使用 t.test() 函數進行雙尾 t 檢驗，假設樣本獨立且方差不相等
+# 選取 gold.oil.df 數據框中的 Gold 列和 Oil 列進行比較
+
+# 執行 t 檢驗
 t.test(gold.oil.df[, "Gold"], gold.oil.df[, "Oil"])
 ```
 
-#### 4.結果解讀
-運行這段程式碼後，R 會輸出 t 檢驗的結果，包括 t 值、p 值以及均值的信賴區間等。根據 p 值，我們可以判斷是否拒絕零假設。若 p 值小於顯著性水平（例如 0.05），則我們可以拒絕零假設，認為兩組數據的均值存在顯著差異。<br>
+#### IV. 是否拒絕 H_0
+```
+根據 t 檢驗的結果，檢查輸出的 p 值：0.7661
+p 值 ≥ 0.05，無法拒絕 H_0，表示目前的數據不足以支持兩組數據均值有顯著差異。
+```
+
+#### V. 結論
+```
+如果我們無法拒絕 H_0，則表示我們沒有足夠的證據表明 Gold 和 Oil 的均值有顯著差異。
+```
 
 ## 2.測試 μ_0 的方法
 
-
-#### 1.簡介
 我們使用範例 10.8 和 food.calories.df 數據文件來演示如何測試 μ_0。以下是步驟和 R 語言程式碼：<br>
-我們的目標是檢驗兩組相關樣本（Before 和 After）之間的均值差異是否大於零。具體來說，我們的零假設 (H0) 是 μ_0 ≤ 0，而對立假設 (HA) 是 μ_0 > 0。這表示我們希望檢查 After 階段的均值是否顯著高於 Before 階段的均值。<br>
 
-#### 2.使用 t.test() 函數
 
-在 R 語言中，我們可以使用 t.test() 函數來進行配對樣本 t 檢驗。由於我們要進行單尾檢驗（右尾檢驗），並且樣本是配對的，我們需要設置以下參數：<br>
+#### I. 假設
+```
+我們的目標是檢驗兩組相關樣本（Before 和 After）之間的均值差異是否大於零。
+具體來說，我們的虛無假設 (H0) 是 μ_0 ≤ 0，而對立假設 (HA) 是 μ_0 > 0。
+這表示我們希望檢查 After 階段的均值是否顯著高於 Before 階段的均值。
 
-paired = TRUE：表示進行配對樣本檢驗。<br>
-alternative = "greater"：表示進行右尾檢驗，即檢驗均值差是否大於零。<br>
-
-#### 3.程式碼與程式碼解釋
-food.calories.df[, "Before"]：選取 food.calories.df 數據框中的 Before 列。<br>
-food.calories.df[, "After"]：選取 food.calories.df 數據框中的 After 列。<br>
-paired = TRUE：指定這是一個配對樣本檢驗。<br>
-alternative = "greater"：指定進行右尾檢驗，即檢驗均值差是否大於零。<br>
-
-```{r 10-5}
-# 範例 10.8
-t.test(food.calories.df[, "Before"], food.calories.df[, "After"], paired = TRUE, alternative = "greater")
+H_0(虛無假設):  μ_0 ≤ 0
+H_A(對立假設) : μ_0 > 0 （右尾檢定）
 ```
 
-#### 4.結果解讀
-根據 p 值（遠小於顯著性水平 0.05），我們可以拒絕零假設，認為 After 階段的均值顯著高於 Before 階段的均值。<br>
 
-# Chapter 11
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 計算 t 統計量
+
+```{r 10-5}
+# 使用範例 10.8 和 food.calories.df 數據文件來檢驗 Before 和 After 階段的均值差異是否大於零
+# 使用 t.test() 函數進行配對樣本 t 檢驗
+# 設置 paired = TRUE 表示配對樣本，alternative = "greater" 表示右尾檢驗
+
+# 執行 t 檢驗
+t.test(food.calories.df[, "Before"], food.calories.df[, "After"], 
+       paired = TRUE, alternative = "greater")
+
+```
+
+#### IV. 是否拒絕 H_0
+```
+根據 p 值（遠小於顯著性水平 0.05），我們可以拒絕虛無假設。
+```
+#### V. 結論
+```
+根據檢定結果，我們拒絕 H_0，得出結論，After 階段的均值顯著高於 Before 階段的均值。
+```
+
+# Chapter 11 Statistical Inference Concerning Variance
 
 Chapter11.xlsx [下載點](https://docs.google.com/spreadsheets/d/1BK8N8Ghh0gokco88COP-PzTWVTNFWP1-/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
@@ -708,11 +780,11 @@ sheet_name_1 <- "Fund_Returns" #這裡輸入您要讀取的sheet的名稱
 
 # 使用read.xlsx函數讀取指定的工作表
 fund.returns.df <- read.xlsx(file_path, sheet = sheet_name_1)
-summary(fund.returns.df)
+head(fund.returns.df)
 ```
 
-## 2.信賴區間計算 σ²
-使用 varTest() 函數來計算方差的置信區間：
+## 2. σ² 的信賴區間
+使用 varTest() 函數來計算變異數的信賴區間：
 ```{r 11-2}
 result <- varTest(fund.returns.df[, "Metals"])
 print(result)
@@ -726,29 +798,53 @@ varTest() 函數的主要輸入值：
 2. y (可選):
   另一個數據向量，用於雙樣本檢定。如果提供了這個向量，則檢驗兩個樣本的方差是否相等。
   sigma.squared (可選):
-  方差的理論值，用於單樣本檢定。默認值為 1。
+  變異數的理論值，用於單樣本檢定。默認值為 1。
 3. alternative (可選):
   定義備擇假設的類型。選項有：
   "two.sided"（雙側檢定，默認）
   "less"（左側檢定）
   "greater"（右側檢定）
 4. conf.level (可選):
-  信賴區間的置信水平，默認為 0.95（即 95% 信賴區間）。
+  * Note that the confidence level is set at 95% by default, but it can be changed by adjusting
+  the conf.level argument (i.e. for 99% we would include conf.level = 0.99 in the function).
 ```
 ## 3.檢驗 σ²
 
-使用範例 11.4 和 fund.returns.df 數據文件中的 "Income" 變量來進行方差檢驗。我們的假設檢驗形式如下：<br/>
+#### I. 假設
+```
+H_0(虛無假設):  σ² = 72.25
+H_A(對立假設) : σ² ≠ 72.25 （雙尾檢定）
+```
 
-零假設 (H0): σ² = 72.25<br/>
-對立假設 (HA): σ² ≠ 72.25<br/>
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 計算檢驗統計量
 
 ```{r 11-3}
+# 使用範例 11.4 和 fund.returns.df 數據文件中的 "Income" 變量進行變異數檢驗
+# 使用 varTest() 函數進行變異數檢驗，檢驗變異數是否等於 72.25
+
+# 執行變異數檢驗
 result <- varTest(fund.returns.df[, "Income"], sigma.squared = 72.25)
 print(result)
 ```
 
-## 4.方差比值的信賴區間計算
-我們使用範例 11.6 和 fund.returns.df 數據文件來構造兩個人口方差比值的置信區間。以下步驟詳細介紹了如何使用 R 來完成這個計算。<br>
+#### IV. 是否拒絕 H_0
+```
+P-value: 0.1682017
+p 值 ≥ 0.05，無法拒絕 H_0
+```
+
+#### V. 結論
+```
+我們無法拒絕 H_0，沒有足夠的證據表明 "Income" 變量的變異數顯著不同於 72.25。
+```
+
+## 4.變異數比值的信賴區間計算
+我們使用範例 11.6 和 fund.returns.df 數據文件來構造兩個母體之間的變異數比值的信賴區間。<br>
 ```{r 11-4}
 # 計算樣本方差比值
 prop.var <- 182.25 / 457.96
@@ -766,30 +862,50 @@ upper.bound <- prop.var * qf(0.975, df2, df1)
 # 顯示結果
 print(lower.bound)
 print(upper.bound)
-
 ```
 
-## 5.方差比值檢驗
-我們使用範例 11.8 和 fund.returns.df 數據文件來進行方差比值的假設檢驗。具體來說，我們將檢驗以下假設：
-![假設](/Users/bear/dev/R/Statistics/截圖 2024-08-15 晚上11.34.07.png "假設")
+## 5.變異數比值檢驗
+我們使用範例 11.8 和 fund.returns.df 數據文件來進行變異數比值的假設檢驗。具體來說，我們將檢驗以下假設：
 
-#### A. 計算檢驗統計量
+#### I. 假設
+![ ](/Users/bear/dev/R/Statistics/截圖 2024-08-24 凌晨1.47.40.png "假設")
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 計算檢驗統計量
 ```{r 11-5}
-# 計算樣本 F 統計量，它是兩個樣本方差的比值
+# 計算樣本 F 統計量，它是兩個樣本變異數的比值
 sample.F <- var(fund.returns.df[,"Metals"]) / var(fund.returns.df[,"Income"])
 
 # 顯示樣本 F 統計量
 print(sample.F)
 ```
 
-#### B.計算 p 值
-使用 pf() 函數來計算與樣本 F 統計量相關的 p 值。由於這是雙尾檢驗，我們需要將計算出的概率乘以 2。
+##### 計算 p 值
 ```{r 11-6}
+# 使用 pf() 函數來計算與樣本 F 統計量相關的 p 值
+# lower.tail = TRUE（默認值）計算的是在 F 統計量左側的累積概率，即從 0 到統計量的累積概率。
+# 使用 lower.tail = FALSE 是為了確保我們獲得正確的右尾概率，再進行雙尾檢定的計算。
+# 由於這是雙尾檢驗，我們需要將計算出的概率乘以 2
+
 # 計算 p 值
 pvalue <- 2 * pf(sample.F, 9, 9, lower.tail = FALSE)
 
 # 顯示 p 值
 print(pvalue)
+```
+
+#### IV. 是否拒絕 H_0
+```
+P-value: 0.001317916
+p 值 < 0.05，拒絕 H_0
+```
+
+#### V. 結論
+```
+我們拒絕 H_0，得出結論，Metals 和 Income 兩組數據的方差顯著不同。
 ```
 
 # Chapter 12
