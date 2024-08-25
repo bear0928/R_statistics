@@ -908,7 +908,7 @@ p 值 < 0.05，拒絕 H_0
 我們拒絕 H_0，得出結論，Metals 和 Income 兩組數據的方差顯著不同。
 ```
 
-# Chapter 12
+# Chapter 12 Chi-Square Tests
 
 Chapter12.xlsx [下載點](https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
@@ -923,14 +923,14 @@ sheet_name_1 <- "Household_Income" #這裡輸入您要讀取的sheet的名稱
 
 # 使用read.xlsx函數讀取指定的工作表
 household.income.df <- read.xlsx(file_path, sheet = sheet_name_1)
-summary(household.income.df)
+head(household.income.df)
 ```
 
-## 2.適配度檢驗
+## 2.適配度檢驗(Goodness-of-Fit Test)
 使用範例 12.1 來進行適配度檢驗，檢查觀察到的數據是否符合假設的分布。<br/>
 
 
-### A. 輸入數據
+#### I. 輸入數據、假設
 ```{r 12-2A}
 # 輸入觀察到的客戶數量
 number.customers <- c(70, 60, 54, 16)
@@ -938,9 +938,17 @@ number.customers <- c(70, 60, 54, 16)
 # 輸入市場份額分布
 market.share <- c(0.40, 0.32, 0.24, 0.04)
 ```
+```
+H_0: p_1 = 0.40, p_2 = 0.32, p_3 = 0.24, p_4 = 0.04
+H_A: At least one p_i differs from its hypothesized value.
+```
 
-### B. 進行卡方適配度檢驗
-#### 具體步驟：
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+##### III. 進行卡方適配度檢驗
 
 1. 準備數據: 我們已經在上一部分中準備好了 number.customers 和 market.share 兩個向量。<br>
 2. 運行檢驗: 在這裡，我們將 number.customers 作為第一個參數，並將 p 設置為 market.share，這樣 R 會將這些預期概率用於檢驗。<br>
@@ -953,15 +961,28 @@ chisq.test.result <- chisq.test(number.customers, p = market.share)
 print(chisq.test.result)
 ```
 
-## 3.獨立性檢驗
+#### IV.是否拒絕 H_0
+```
+P-value: 0.01655632
+p 值 < 0.05，拒絕 H_0
+```
+
+#### V. 結論
+```
+At least one p_i differs from its hypothesized value.
+```
+
+## 3.獨立性檢驗(Test for Independence)
 基於表 12.8 中的數據，使用卡方檢驗來檢查性別和車輛類型之間是否存在獨立性。<br>
-### A. 構建列聯表
+
+
+#### I. 構建列聯表(contingency table)、假設
 ```{r 12-3A}
 # 輸入數據
 female <- c(50, 60)
 male <- c(120, 170)
 
-# 創建列聯表
+# 創建列聯表(contingency table)
 table <- rbind(female, male)
 
 # 為列聯表命名列
@@ -970,8 +991,17 @@ colnames(table) <- c("economy.car", "noneconomy.car")
 # 顯示列聯表
 print(table)
 ```
+```
+H_0(虛無假設):  性別和車輛類型之間是獨立的
+H_A(對立假設) : 性別和車輛類型之間存在關聯（即不獨立）
+```
 
-### B. 進行卡方獨立性檢驗
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 進行卡方獨立性檢驗
 ```{r 12-3B}
 # 進行卡方獨立性檢驗
 chisq.test.result <- chisq.test(table, correct = FALSE)
@@ -980,7 +1010,83 @@ chisq.test.result <- chisq.test(table, correct = FALSE)
 print(chisq.test.result)
 ```
 
-# Chapter 14
+#### IV.是否拒絕 H_0
+```
+P-value: 0.4616154
+p 值 ≥ 0.05，則無法拒絕 H_0，表示目前的數據不足以支持性別和車輛類型之間存在關聯。
+```
+
+#### V. 結論
+```
+我們無法拒絕 H_0，沒有足夠的證據表明性別和車輛類型之間存在關聯。
+```
+
+## 4. 常態性檢驗(Tests for Normality)
+
+#### I. 假設
+```
+H_0(虛無假設):  數據服從常態分布
+H_A(對立假設) : 數據不服從常態分布
+```
+
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 使用 Pearson 卡方檢驗進行常態性檢驗
+```{r 12-4A}
+# 使用 nortest 包中的 pearson.test() 函數來進行常態性檢驗
+pearson.test(household.income.df[, "Household.Income"])
+```
+
+##### 結果解讀
+```
+檢驗名稱: Pearson 卡方常態性檢驗
+檢驗統計量: P = 22
+p 值: 0.002540414
+
+根據 p 值（0.002540414），我們拒絕 H_0，表示數據不服從常態分布。
+```
+
+#### IV. 使用 Jarque-Bera 檢驗進行常態性檢驗
+```{r 12-4B}
+# 使用 fBasics 包中的 jarqueberaTest() 函數來進行常態性檢驗
+jarqueberaTest(household.income.df[, "Household.Income"])
+```
+
+##### 結果解讀
+```
+檢驗名稱: Jarque-Bera 常態性檢驗
+檢驗統計量: X-squared = 116.1437
+p 值: < 2.2e-16
+
+根據 p 值（< 2.2e-16），我們拒絕 H_0，表示數據不服從常態分布。
+```
+
+#### V. 使用 Anderson-Darling 檢驗進行常態性檢驗
+```{r 12-4C}
+# 使用 nortest 包中的 ad.test() 函數來進行常態性檢驗
+ad.test(household.income.df[, "Household.Income"])
+```
+
+##### 結果解讀
+```
+檢驗名稱: Anderson-Darling 常態性檢驗
+檢驗統計量: A = 2.925133
+p 值: 1.842161e-07
+
+根據 p 值（1.842161e-07），我們拒絕 H_0，表示數據不服從常態分布。
+
+```
+
+#### VI. 結論
+```
+根據以上三種常態性檢驗結果，我們均拒絕 H_0，表示 Household.Income 數據不服從常態分布。
+無論使用哪一種檢驗方法，結論都是一致的：該數據集不符合常態分布。
+```
+
+# Chapter 14 Regression Analysis
 
 Chapter14.xlsx [下載點](https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
 
@@ -996,24 +1102,157 @@ sheet_name_1 <- "Debt_Payments" #這裡輸入您要讀取的sheet的名稱
 
 # 使用read.xlsx函數讀取指定的工作表
 debt.payments.df <- read.xlsx(file_path, sheet = sheet_name_1)
-summary(debt.payments.df)
+head(debt.payments.df)
 ```
 
-## 2.簡單線性迴歸分析
+## 2.簡單線性迴歸分析(Simple Linear Regression)
 範例14.4，使用 debt.payments.df 數據文件來估計一個簡單線性迴歸模型，並生成相關的回歸和 ANOVA 表。<br/>
 
-### A. 輸入數據
+#### I. 假設
+```
+H_0(虛無假設):  自變量 (Income) 對應變量 (Debt) 沒有顯著影響
+H_A(對立假設) : 自變量 (Income) 對應變量 (Debt) 有顯著影響
+```
+
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 輸入數據並構建線性迴歸模型
 ```{r 14-2A}
 # 構建線性迴歸模型
-# 首先，我們使用 lm() 函數來構建一個線性模型對象。這個模型將債務 (Debt) 作為應變量，收入 (Income) 作為自變量。
+# 使用 lm() 函數來構建一個線性模型對象。這個模型將債務 (Debt) 作為應變量，收入 (Income) 作為自變量。
 debt.income.lm <- lm(Debt ~ Income, data = debt.payments.df)
 ```
 
-### B. 進行卡方適配度檢驗
+#### IV. 獲取回歸模型摘要
 ```{r 14-2B}
 # 使用 summary() 函數來獲取回歸模型的摘要，包括係數估計、標準誤差、t 值和顯著性水平等信息。
 summary(debt.income.lm)
 ```
+
+#### V. 進行 ANOVA 分析
+```{r, 14-2C}
+# 使用 anova() 函數來生成 ANOVA 表，以檢查模型的總體顯著性
+anova(debt.income.lm)
+```
+
+#### VI. 結果解讀
+```
+1. 迴歸係數：
+  截距 (估計值 = 210.298, p 值 = 0.0303)：
+      這表示當收入為零時，預計債務為 210.298 單位。
+  收入 (估計值 = 10.441, p 值 = 9.66e-09)：
+      此係數非常顯著（p 值 < 0.001），表明收入對債務有強烈且正向的影響。
+2. 模型擬合度：
+  R 平方 = 0.7526，調整後的 R 平方 = 0.7423：
+      這表示約 75.26% 的債務變異可以由收入解釋。
+3. ANOVA F 統計量：
+  F 統計量 = 73，p 值 = 9.66e-09：
+      整體模型具有統計顯著性，表明收入對債務具有顯著的預測能力。
+```
+
+#### VII. 結論
+```
+根據回歸分析和 ANOVA 結果，我們拒絕 H_0，這表明收入對債務有顯著影響。
+正向的迴歸係數表明隨著收入增加，債務也會增加。
+```
+
+## 3.多元迴歸分析(Multiple Regression)
+範例14.6<br/>
+
+#### I. 假設
+```
+H_0 (虛無假設): 收入和失業率對債務沒有顯著影響。
+H_A (對立假設): 收入和/或失業率對債務有顯著影響。
+```
+
+#### II. 設定 α 值
+```
+α = 0.05
+```
+
+#### III. 輸入數據並構建多元線性迴歸模型
+```{r 14-3A}
+# 構建多元線性迴歸模型
+# 使用 lm() 函數來創建一個多元線性模型對象，將債務 (Debt) 作為應變量，收入 (Income) 和失業率 (Unemployment) 作為自變量。
+debt.multiple.lm <- lm(Debt ~ Income + Unemployment, data = debt.payments.df)
+# 注意：lm() 函數執行後不會立即輸出結果，您需要使用其他函數來查看結果。
+```
+
+#### IV. 獲取回歸模型摘要
+```{r 14-3B}
+# 使用 summary() 函數來獲取回歸模型的摘要，包括係數估計、標準誤差、t 值和 p 值等信息。
+summary(debt.multiple.lm)
+```
+
+#### V. 進行 ANOVA 分析
+```{r, 14-3C}
+# 使用 anova() 函數生成 ANOVA 表，以評估模型的整體顯著性。
+anova(debt.multiple.lm)
+```
+
+#### VI. 結果解讀
+```
+1. 迴歸係數：
+    截距 (估計值 = 198.9956, p 值 = 0.216)：
+        這表示當收入和失業率為零時，預計債務為 198.9956 單位，但 p 值不顯著，無法得出明確結論。
+    收入 (估計值 = 10.5122, p 值 = 2.98e-07)：
+        此係數非常顯著（p 值 < 0.001），表明收入對債務有強烈且正向的影響。
+    失業率 (估計值 = 0.6186, p 值 = 0.929)：
+        失業率的影響不顯著（p 值 > 0.05），因此我們無法確認失業率對債務的顯著影響。
+2.模型擬合度：
+    R 平方 = 0.7527，調整後的 R 平方 = 0.7312：
+        這表示約 75.27% 的債務變異可以由收入和失業率解釋。
+3.ANOVA F 統計量：
+    F 統計量 = 35，p 值 = 1.054e-07：
+        整體模型具有統計顯著性，表明收入和/或失業率對債務具有顯著的預測能力。
+```
+
+#### VII. 結論
+```
+根據多元迴歸分析和 ANOVA 結果，我們拒絕 H_0，這表明收入對債務有顯著影響。
+雖然失業率的影響不顯著，但整體模型還是具有顯著性。
+```
+
+## 4. 構建帶有趨勢線的散佈圖
+### I. 使用 plot() 函數構建散佈圖
+```{r, 14-4-1}
+# 使用 debt.payments.df 數據文件來構建散佈圖。
+# 使用 plot() 函數創建散佈圖，並且自定義 x 軸和 y 軸的標籤。
+plot(debt.payments.df[,"Debt"] ~ debt.payments.df[,"Income"],
+     ylab = "債務支付 ($)", xlab = "收入 ($1,000s)")
+```
+
+### II. 添加趨勢線
+```{r, 14-4-2}
+# 使用 debt.payments.df 數據文件來構建散佈圖。
+# 使用 plot() 函數創建散佈圖，並且自定義 x 軸和 y 軸的標籤。
+plot(debt.payments.df[,"Debt"] ~ debt.payments.df[,"Income"],
+     ylab = "債務支付 ($)", xlab = "收入 ($1,000s)")
+
+# 使用 lm() 函數來構建一個簡單的線性回歸模型
+# 然後使用 abline() 函數將趨勢線添加到散佈圖中
+debt.income.lm <- lm(Debt ~ Income, data = debt.payments.df)
+abline(debt.income.lm)
+```
+
+### III. 使用 ggplot2 函數構建更精美的散佈圖
+```{r, 14-4-3}
+# 載入 ggplot2
+library(ggplot2)
+
+# 使用 ggplot2 創建帶有趨勢線的散佈圖
+debt.income.plot <- ggplot(debt.payments.df, aes(Income, Debt)) +
+                    geom_point() +  # 添加數據點
+                    geom_smooth(method = "lm", se = FALSE) +  # 添加趨勢線
+                    labs(x = "收入 ($1,000s)", y = "債務支付 ($)")  # 添加自定義標籤
+
+# 顯示圖表
+print(debt.income.plot)
+```
+
 # 參考資料
 
 **Textbook**<br>
