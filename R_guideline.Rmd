@@ -1253,6 +1253,191 @@ debt.income.plot <- ggplot(debt.payments.df, aes(Income, Debt)) +
 print(debt.income.plot)
 ```
 
+# Chapter 13
+
+Chapter13.xlsx [下載點](https://docs.google.com/spreadsheets/d/1ZkKtaNMsz2UGI0MjJycjSKdwVxVKkTcu/edit?usp=share_link&ouid=110553448349846752071&rtpof=true&sd=true)
+
+## 1.安裝、載入套件&讀檔
+```{r 13-1}
+# 載入套件
+# install.packages(c("openxlsx", "reshape2", "agricolae"))
+library(openxlsx)
+library(reshape2)
+library(agricolae)
+
+# 讀取檔案
+file_path <- "/Users/bear/dev/R/Statistics/Data Files/Chapter13.xlsx" # 更改成您要讀取之xlsx的路徑
+sheet_name_1 <- "Public_Transportation" #這裡輸入您要讀取的sheet的名稱
+sheet_name_2 <- "TwoFactor_Income" #這裡輸入您要讀取的sheet的名稱
+sheet_name_3 <- "Income_Interaction" #這裡輸入您要讀取的sheet的名稱
+
+# 使用read.xlsx函數讀取指定的工作表
+public.transportation.df <- read.xlsx(file_path, sheet = sheet_name_1)
+two.factor.income.df <- read.xlsx(file_path, sheet = sheet_name_2)
+income.interaction.df<- read.xlsx(file_path, sheet = sheet_name_3)
+
+# head
+head(public.transportation.df)
+head(two.factor.income.df)
+head(income.interaction.df)
+```
+
+## 2. One-Way ANOVA; Fisher and Tukey Confidence Intervals
+(Replicating Table 13.4 and Table 13.5)
+
+### A. 數據準備
+```
+首先，我們需要將城市名稱和成本數值進行堆疊。為此，我們使用 reshape2 包中的 melt() 函數來重新配置數據，並將結果儲存為 melted.df。這裡 melt() 函數將數據堆疊成兩列：一列表示城市名稱（City），另一列表示相應的交通成本（Cost）。
+```
+```{r 13-2}
+# 加載reshape2包
+library(reshape2)
+
+# 堆疊城市名稱和成本數據
+melted.df <- melt(public.transportation.df)
+
+# 將堆疊後的數據列命名
+colnames(melted.df) <- c("City", "Cost")
+
+# 查看堆疊後的數據
+print(melted.df)
+```
+
+### B. 建立變異數分析模型(variance model)
+```
+我們使用 aov() 函數來構建一個變異數分析模型(variance model)，並將該模型儲存為 transit.aov。
+這個模型將交通成本 (Cost) 作為應變量，城市 (City) 作為自變量。
+```
+
+```{r 13-3}
+# 建立變異數分析模型
+transit.aov <- aov(Cost ~ City, data = melted.df)
+```
+
+### C. 生成 ANOVA 表
+```{r 13-4}
+# 生成 ANOVA 表
+anova_result <- anova(transit.aov)
+print(anova_result)
+```
+```
+使用 anova() 函數來生成 ANOVA 表，該表顯示了不同城市間的成本差異是否具有統計顯著性。
+
+解釋：
+  City: P 值（Pr(>F)）小於 0.001，表明城市之間的成本差異具有顯著性。
+```
+
+### D. 使用 TukeyHSD 進行多重比較檢驗
+```
+我們使用 TukeyHSD() 函數來進行 Tukey HSD 檢驗，這是一種多重比較方法，用於比較多個組別之間的均值差異。我們將置信水平（conf.level）設為 95%。
+```
+
+```{r 13-5}
+# 進行 Tukey 檢驗
+tukey_result <- TukeyHSD(transit.aov, conf.level = 0.95)
+print(tukey_result)
+```
+
+### E. 使用 LSD.test 進行 Fisher 檢驗
+```
+R 中沒有直接計算 Fisher 置信區間的函數，
+但我們可以使用 argicolae 包中的 LSD.test() 函數來計算 Fisher 的 LSD 檢驗所需的所有值。
+```
+
+```{r 13-6}
+# 加載 agricolae 包
+library(agricolae)
+
+# 進行 Fisher 檢驗
+fisher.lsd <- LSD.test(transit.aov, "City")
+print(fisher.lsd)
+```
+
+## 3. Two-Way ANOVA (No Interaction) 
+(Replicating Table 13.14)
+
+### A. 重新配置數據
+```{r 13-7}
+# 使用 melt() 函數重新配置數據
+melted2.df <- melt(two.factor.income.df, id.vars = "X1")
+# 命名列
+colnames(melted2.df) <- c("Education", "Field", "Salary")
+```
+
+### B. 建立變異數分析模型(variance model)
+```
+接著，我們使用 aov() 函數來構建一個加法模型（即沒有交互作用的模型），並將該模型儲存為 income.aov。
+這個模型將薪資 (Salary) 作為應變量，教育程度 (Education) 和專業領域 (Field) 作為自變量。
+```
+
+```{r 13-8}
+# 建立雙因子變異數分析模型
+income.aov <- aov(Salary ~ Education + Field, data = melted2.df)
+```
+
+### C. 生成 ANOVA 表
+```{r 13-9}
+# 生成 ANOVA 表
+anova_result <- anova(income.aov)
+print(anova_result)
+```
+```
+解釋：
+  Education: F 值為 56.5750，P 值（Pr(>F)）小於 0.001，表明教育程度對薪資的影響具有高度顯著性。
+  Field: F 值為 6.4429，P 值為 0.03207，表明專業領域對薪資的影響具有顯著性。
+  Residuals: 殘差的自由度為 6，Sum Sq 為 269.8。
+```
+
+## 4. Two-Way ANOVA (with Interaction) 
+(Replicating Table 13.17)
+
+### A. 數據清理
+```
+首先，我們需要清理數據。由於原始數據框 income.interaction.df 的第一列中某些欄位缺少資料，
+因此我們使用 c() 和 rep() 函數來創建一個新的列，並替換原始的第一列。
+這樣做可以確保每個教育程度的名稱正確地對應於每組數據。
+```
+```{r 13-10}
+# 清理數據，替換第一列
+income.interaction.df[, 1] <- c(rep("High School", 3),
+                                rep("Bachelor's", 3),
+                                rep("Master's", 3),
+                                rep("Ph.D.", 3))
+```
+
+### B. 重新配置數據
+```{r 13-11}
+# 使用 melt() 函數重新配置數據，將教育程度、專業領域和薪資值堆疊在一起。
+melted3.df <- melt(income.interaction.df, id.vars = "X1")
+# 命名列
+colnames(melted3.df) <- c("Education", "Field", "Salary")
+```
+
+### C. 建立基於交互作用的變異數分析模型
+```
+接著，我們使用 aov() 函數來構建一個有交互作用的模型，並將該模型儲存為 income2.aov。
+這個模型將薪資 (Salary) 作為應變量，並考慮教育程度 (Education)、專業領域 (Field) 及其交互作用。
+```
+
+```{r 13-12}
+# 構建基於交互作用的方差分析模型
+income2.aov <- aov(Salary ~ Education * Field, data = melted3.df)
+```
+
+### D. 生成 ANOVA 表
+```{r 13-13}
+# 生成 ANOVA 表
+anova_result <- anova(income2.aov)
+print(anova_result)
+```
+```
+解釋：
+  Education: F 值為 658.5205，P 值（Pr(>F)）小於 0.001，表明教育程度對薪資的影響具有高度顯著性。
+  Field: F 值為 44.0963，P 值小於 0.001，表明專業領域對薪資的影響具有顯著性。
+  教育程度與專業領域之間的交互作用的自由度為 6，Sum Sq 為 318.4，Mean Sq 為 53.1，
+    F 值為 5.1087，P 值為 0.001659，表明這個交互作用對薪資的影響也具有統計顯著性。
+```
+
 # 參考資料
 
 **Textbook**<br>
